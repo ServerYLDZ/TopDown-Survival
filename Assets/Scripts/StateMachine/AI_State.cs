@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class AI_State : MonoBehaviour
 {
-    public abstract AI_State RunState(Actor actor);
+    public abstract AI_State RunState(Ally actor);
   
 }

@@ -10,7 +10,7 @@ public class ItemBase : MonoBehaviour
     {
         Debug.Log("hi");
     }
-    public virtual void UseItem(Actor act)
+    public virtual void UseItem(Ally act)
     {
         Debug.Log("hi");
     }

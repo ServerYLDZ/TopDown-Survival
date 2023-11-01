@@ -15,7 +15,7 @@ public class Mashroom : ItemBase
     public int foodAmount=1;
     public int healEffectAmount =1;
     public MashroomType type;
-    public override void UseItem(Actor act)
+    public override void UseItem(Ally act)
     {
         switch (type)
         {

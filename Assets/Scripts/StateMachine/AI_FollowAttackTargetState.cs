@@ -6,7 +6,7 @@ public class AI_FollowAttackTargetState : AI_State
 {
     public AI_State attackState;
     
-    public override AI_State RunState(Actor actor)
+    public override AI_State RunState(Ally actor)
     {
 
        float dis= actor.weapon.attackDistance; ;

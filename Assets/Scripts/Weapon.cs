@@ -17,7 +17,7 @@ public class Weapon :ItemBase
         Sword,
         Gun
     }
-    public override void UseItem(Actor act)
+    public override void UseItem(Ally act)
     {
         act.weapon = this;
         if (act.weponTransform.childCount==0)

@@ -7,14 +7,18 @@ public class Interactable : MonoBehaviour
 {
 
     public Actor myActor { get; private set; }
+    public Ally myAlly { get; private set; }
 
     public InteractableType interactionType;
 
     void Awake()
     {
-        if (interactionType == InteractableType.Enemy || interactionType == InteractableType.Ally)
+        if (interactionType == InteractableType.Enemy)
         { myActor = GetComponent<Actor>(); }
-       
+        if(interactionType == InteractableType.Ally)
+        {
+            myAlly = GetComponent<Ally>();
+        }
     }
 
     public void InteractWithItem()
@@ -47,17 +51,17 @@ public class Interactable : MonoBehaviour
     }
     public void InteractWithAlly()
     {
-        if (myActor.currentState == ActorState.None)
+        if (myAlly.currentState == ActorState.None)
         {
             Debug.Log("Hi");
-            myActor.currentState = ActorState.Follow;
-            ActorControlPanel.Instance.AddActorControlPrefab(myActor);
+            myAlly.currentState = ActorState.Follow;
+            ActorControlPanel.Instance.AddActorControlPrefab(myAlly);
          
             //effect girer 
         }
         else
         {
-            myActor.InfoPanel.OpenCloseInfoPanel();
+            myAlly.InfoPanel.OpenCloseInfoPanel();
             GameManager.Instance.OpenInventor();
         }
      

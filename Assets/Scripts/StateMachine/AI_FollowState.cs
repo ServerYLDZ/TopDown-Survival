@@ -6,7 +6,7 @@ public class AI_FollowState : AI_State
 {
     public AI_State followAttackTargetState;
     
-    public override AI_State RunState(Actor actor)
+    public override AI_State RunState(Ally actor)
     {
         if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target) 
         if( GameManager.Instance.playerActor.GetComponent<PlayerController>().target.interactionType == InteractableType.Enemy)

@@ -6,7 +6,7 @@ public class ActorControlPanel : MonoSingleton<ActorControlPanel>
 {
     public ActorControlItem actorControlPrefab;
     public Transform spawnPoint;
-    public void AddActorControlPrefab(Actor act)
+    public void AddActorControlPrefab(Ally act)
     {
         ActorControlItem prfb = Instantiate(actorControlPrefab, spawnPoint);
         prfb.image.sprite = act.ClassSprite;
@@ -16,7 +16,7 @@ public class ActorControlPanel : MonoSingleton<ActorControlPanel>
         prfb.currentState.text = act.currentState.ToString();
 
     }
-    public void RefreshActorControlPrefab(Actor act , ActorControlItem item)
+    public void RefreshActorControlPrefab(Ally act , ActorControlItem item)
     {
         item.image.sprite = act.ClassSprite;
         item.Name.text = act.ActName.ToString();

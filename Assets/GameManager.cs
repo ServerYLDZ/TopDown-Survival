@@ -7,13 +7,13 @@ public class GameManager : MonoSingleton<GameManager>
     public float Food;
     public float Wood;
     public float Watter;
-    public Actor playerActor;
-    public Actor CurrentActor;
+    public Ally playerActor;
+    public Ally CurrentActor;
     public Envanter Inventer;
     public Weapon HandWepon;
     public GameObject InventoryTAB;
     private bool inventortyOpen = false;
-    public Actor[] allActors;
+    public Ally[] allActors;
     public Transform []actorFolowPlayerPos;
     public bool[] isActorFolowPlayerPosUseForNow;
 

@@ -9,8 +9,8 @@ public class Aİ_AttackState : AI_State
     const string ATTACK = "Attack";
     const string ATTACK_SWORD = "SwordSlash";
     const string ATTACK_GUN = "GunShot";
-    private Actor thisActor;
-    public override AI_State RunState(Actor actor)
+    private Ally thisActor;
+    public override AI_State RunState(Ally actor)
     {
        thisActor = actor;
 
@@ -117,7 +117,7 @@ public class Aİ_AttackState : AI_State
 
     void ResetBusyState()
     {
-        Debug.Log("sıfırla");
+      
         transform.parent.GetComponent<Actor>().actorBusy = false;
         thisActor.SetAnimations();
     }

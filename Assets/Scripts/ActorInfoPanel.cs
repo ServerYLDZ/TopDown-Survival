@@ -6,7 +6,7 @@ using TMPro;
 
 public class ActorInfoPanel : MonoBehaviour
 {
-    public Actor targetActor;
+    public Ally targetActor;
     public TMP_Text Health;
     public TMP_Text myClass;
     public TMP_Text FarmSpeed;
@@ -20,6 +20,10 @@ public class ActorInfoPanel : MonoBehaviour
 
     public bool isOpen=false;
     private void OnEnable()
+    {
+        SetInfoPanel();
+    }
+    private void Start()
     {
         SetInfoPanel();
     }

@@ -12,7 +12,7 @@ public class ActorStateMacineController : MonoBehaviour
     }
     private void  RunStateMachine()
     {
-        AI_State state = currentState.RunState(GetComponent<Actor>());
+        AI_State state = currentState.RunState(GetComponent<Ally>());
         if (currentState != null)
         {
             currentState = state;

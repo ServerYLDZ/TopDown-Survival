@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (target == null) return;
         if (target.interactionType == InteractableType.Enemy)
         {
-            dis =GetComponent<Actor>().weapon.attackDistance;
+            dis =GetComponent<Ally>().weapon.attackDistance;
         }
           
         else
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             case InteractableType.Enemy:
 
-                switch (GetComponent<Actor>().weapon.weponType) //sliah tipine gore anim oynar
+                switch (GetComponent<Ally>().weapon.weponType) //sliah tipine gore anim oynar
                 {
                     case Weapon.WeaponType.None:
                         animator.Play(ATTACK);
@@ -118,9 +118,9 @@ public class PlayerController : MonoBehaviour
                 }
                
 
-                  Invoke(nameof(SendAttack), GetComponent<Actor>().weapon. attackDelay);
+                  Invoke(nameof(SendAttack), GetComponent<Ally>().weapon. attackDelay);
          
-                Invoke(nameof(ResetBusyState), GetComponent<Actor>().weapon.attackSpeed);
+                Invoke(nameof(ResetBusyState), GetComponent<Ally>().weapon.attackSpeed);
                 break;
             case InteractableType.Item:
 
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
         
         Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        target.GetComponent<Actor>().TakeDamage(GetComponent<Actor>().weapon.attackDamage);
+        target.GetComponent<Actor>().TakeDamage(GetComponent<Ally>().weapon.attackDamage);
         
         
     }
