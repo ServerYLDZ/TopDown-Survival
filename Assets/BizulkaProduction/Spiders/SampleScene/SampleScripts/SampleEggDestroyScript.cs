@@ -23,7 +23,7 @@ public class SampleEggDestroyScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         for (int i = 0; i < _eggControllers.Length; i++)
         {
-            _eggControllers[i].Destroy();
+            _eggControllers[i].DestroyEgg();
             yield return new WaitForSeconds(Random.value);
             
         }

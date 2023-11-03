@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Aİ_AttackState : AI_State
 {
@@ -17,9 +18,9 @@ public class Aİ_AttackState : AI_State
  
 
 
-        if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target)
+        if (actor.target)
         {
-            if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target.interactionType != InteractableType.Enemy)
+            if (!actor.target.GetComponent<Enemy>())
             {
                 actor.actorBusy = false;
                 actor.currentState = ActorState.Follow;
@@ -30,7 +31,7 @@ public class Aİ_AttackState : AI_State
             {
                 float dis = actor.weapon.attackDistance; ;
                 if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target)
-                    if (Vector3.Distance(GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform.position, actor.transform.position) >= dis)
+                    if (Vector3.Distance(actor.target.transform.position, actor.transform.position) >= dis)
                     {
                         actor.actorBusy = false;
                         actor.target = GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform;
@@ -47,44 +48,47 @@ public class Aİ_AttackState : AI_State
             actor.currentState = ActorState.Follow;
             return followState;
         }
-
-
-        Vector3 dir = (thisActor.target.transform.position - thisActor.transform.position).normalized;
-        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-        thisActor.transform.rotation = Quaternion.Slerp(thisActor.transform.rotation, lookRot, Time.deltaTime * thisActor.lookRotationSpeed);
-
-
-        thisActor.agent.SetDestination(actor.transform.position); //durdur
-
+        if (thisActor.target)
+        {
+            Vector3 dir = (thisActor.target.transform.position - thisActor.transform.position).normalized;
+            Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+            thisActor.transform.rotation = Quaternion.Slerp(thisActor.transform.rotation, lookRot, Time.deltaTime * thisActor.lookRotationSpeed);
+            thisActor.agent.SetDestination(actor.transform.position); //durdur
 
 
 
+            if (thisActor.actorBusy) return this;
+
+            thisActor.actorBusy = true;
+
+            switch (thisActor.weapon.weponType) //sliah tipine gore anim oynar
+            {
+                case Weapon.WeaponType.None:
+                    thisActor.animator.Play(ATTACK);
+                    break;
+                case Weapon.WeaponType.Sword:
+                    thisActor.animator.Play(ATTACK_SWORD);
+                    break;
+                case Weapon.WeaponType.Gun:
+                    thisActor.animator.Play(ATTACK_GUN);
+                    break;
+            }
 
 
-        if (thisActor.actorBusy) return this;
 
-        thisActor.actorBusy = true;
-
-                switch (thisActor.weapon.weponType) //sliah tipine gore anim oynar
-                {
-                    case Weapon.WeaponType.None:
-                       thisActor.animator.Play(ATTACK);
-                        break;
-                    case Weapon.WeaponType.Sword:
-                thisActor.animator.Play(ATTACK_SWORD);
-                        break;
-                    case Weapon.WeaponType.Gun:
-                thisActor.animator.Play(ATTACK_GUN);
-                        break;
-                }
-
-       
-
-        Invoke("SendAttack", thisActor.weapon.attackDelay);
+            Invoke("SendAttack", thisActor.weapon.attackDelay);
 
 
-         Invoke("ResetBusyState", thisActor.weapon.attackSpeed);
-
+            Invoke("ResetBusyState", thisActor.weapon.attackSpeed);
+        }
+        else
+        {
+            actor.actorBusy = false;
+            actor.target = GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform;
+            actor.currentState = ActorState.Attack;
+            return followAttackState;
+        }
+      
         return this;
     }
 
@@ -93,23 +97,28 @@ public class Aİ_AttackState : AI_State
     AI_State SendAttack()
     {
 
-        if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target == null)
+        if (thisActor.target == null)
         {
             thisActor.actorBusy = false;
             thisActor.target = null;
             thisActor.currentState = ActorState.Follow;
             return followState;
         }
-        if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target.myActor.currentHealth <= 0)
+        if(thisActor.target.GetComponent<Enemy>())
+        if (thisActor.target.GetComponent<Enemy>().currentHealth <= 0)
         {
         thisActor.currentState = ActorState.Follow;
-            GameManager.Instance.playerActor.GetComponent<PlayerController>().target = null; 
+            thisActor.target = null; 
         }
 
        
-
-        Instantiate(thisActor.hitEffect, GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        GameManager.Instance.playerActor.GetComponent<PlayerController>().target.GetComponent<Actor>().TakeDamage(thisActor.weapon.attackDamage);
+        if(thisActor.target && thisActor&& thisActor.target.GetComponent<Enemy>())
+        {
+            
+            Instantiate(thisActor.hitEffect, thisActor.target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            thisActor.target.GetComponent<Enemy>().TakeDamage(thisActor.weapon.attackDamage);
+        }
+      
 
         return this;
     }

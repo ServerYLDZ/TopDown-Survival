@@ -103,24 +103,48 @@ public class PlayerController : MonoBehaviour
         switch (target.interactionType)
         {
             case InteractableType.Enemy:
-
-                switch (GetComponent<Ally>().weapon.weponType) //sliah tipine gore anim oynar
+                if (target.GetComponent<Enemy>())
                 {
-                    case Weapon.WeaponType.None:
-                        animator.Play(ATTACK);
-                        break;
-                    case Weapon.WeaponType.Sword:
-                        animator.Play(ATTACK_SWORD);
-                        break;
-                    case Weapon.WeaponType.Gun:
-                        animator.Play(ATTACK_GUN);
-                        break;
-                }
-               
+                    switch (GetComponent<Ally>().weapon.weponType) //sliah tipine gore anim oynar
+                    {
+                        case Weapon.WeaponType.None:
+                            animator.Play(ATTACK);
+                            break;
+                        case Weapon.WeaponType.Sword:
+                            animator.Play(ATTACK_SWORD);
+                            break;
+                        case Weapon.WeaponType.Gun:
+                            animator.Play(ATTACK_GUN);
+                            break;
+                    }
 
-                  Invoke(nameof(SendAttack), GetComponent<Ally>().weapon. attackDelay);
-         
-                Invoke(nameof(ResetBusyState), GetComponent<Ally>().weapon.attackSpeed);
+
+                    Invoke(nameof(SendAttack), GetComponent<Ally>().weapon.attackDelay);
+
+                    Invoke(nameof(ResetBusyState), GetComponent<Ally>().weapon.attackSpeed);
+                }
+                else if (target.GetComponent<EggController>())
+                {
+                    switch (GetComponent<Ally>().weapon.weponType) //sliah tipine gore anim oynar
+                    {
+                        case Weapon.WeaponType.None:
+                            animator.Play(ATTACK);
+                            break;
+                        case Weapon.WeaponType.Sword:
+                            animator.Play(ATTACK_SWORD);
+                            break;
+                        case Weapon.WeaponType.Gun:
+                            animator.Play(ATTACK_GUN);
+                            break;
+                    }
+
+
+                    Invoke(nameof(SendEggAttack), GetComponent<Ally>().weapon.attackDelay);
+
+                    Invoke(nameof(ResetBusyState), GetComponent<Ally>().weapon.attackSpeed);
+
+                }
+              
                 break;
             case InteractableType.Item:
 
@@ -136,11 +160,22 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    void SendEggAttack()
+    {
+        if (target == null) return;
+
+        if (target.GetComponent<EggController>().currentHealt <= 0)
+        { target = null; return; }
+
+
+        Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        target.GetComponent<EggController>().TakeDamage(GetComponent<Ally>().weapon.attackDamage);
+    }
     void SendAttack()
     {
         if (target == null) return;
 
-        if (target.myActor.currentHealth <= 0)
+        if (target.myEnemy.currentHealth <= 0)
         { target = null; return; }
 
         

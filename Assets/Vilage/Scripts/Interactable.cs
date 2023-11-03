@@ -6,7 +6,7 @@ public enum InteractableType { Enemy, Item,Ally }
 public class Interactable : MonoBehaviour
 {
 
-    public Actor myActor { get; private set; }
+    public Actor myEnemy { get; private set; }
     public Ally myAlly { get; private set; }
 
     public InteractableType interactionType;
@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     void Awake()
     {
         if (interactionType == InteractableType.Enemy)
-        { myActor = GetComponent<Actor>(); }
+        { myEnemy = GetComponent<Enemy>(); }
         if(interactionType == InteractableType.Ally)
         {
             myAlly = GetComponent<Ally>();
@@ -53,7 +53,7 @@ public class Interactable : MonoBehaviour
     {
         if (myAlly.currentState == ActorState.None)
         {
-            Debug.Log("Hi");
+            
             myAlly.currentState = ActorState.Follow;
             ActorControlPanel.Instance.AddActorControlPrefab(myAlly);
          

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Ally : Actor
 {
     const string IDLE = "Idle";
     const string WALK = "Walk";
 
+    
 
     public ActorInfoPanel InfoPanel;
     public Transform weponTransform;
@@ -28,12 +30,21 @@ public class Ally : Actor
     void Start()
     {
         StartCoroutine(SetAnimationSlowly());
+       
     }
 
-    // Update is called once per frame
-    void Update()
+   
+    public override void TakeDamage(int amount)
     {
-        
+
+        currentHealth -= amount;
+
+        if (currentHealth <= 0)
+        { Death(); }
+    }
+    public override void Death()
+    {
+        base.Death();
     }
 
     public void FollowPlayer()
@@ -52,10 +63,13 @@ public class Ally : Actor
             }
 
         }
+        if (target)
+        {
+            agent.SetDestination(target.position);
 
-        agent.SetDestination(target.position);
-
-        RotateTarget();
+            RotateTarget();
+        }
+     
 
     }
 
@@ -75,4 +89,6 @@ public class Ally : Actor
         SetAnimations();
         StartCoroutine(SetAnimationSlowly());
     }
+
+
 }

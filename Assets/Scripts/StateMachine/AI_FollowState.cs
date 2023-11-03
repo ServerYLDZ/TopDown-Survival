@@ -12,6 +12,7 @@ public class AI_FollowState : AI_State
         if( GameManager.Instance.playerActor.GetComponent<PlayerController>().target.interactionType == InteractableType.Enemy)
         {
                 actor.target = GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform;
+                
                 GameManager.Instance.IsActorFolowPlayerPosUseForNow();
             return followAttackTargetState;
         }

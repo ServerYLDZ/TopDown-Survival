@@ -50,16 +50,26 @@ public class Actor : MonoBehaviour
     {
         
     }
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
         { Death(); }
     }
 
-    void Death()
+    public virtual void  Death()
     {
-        Destroy(gameObject);
+        if (myClass == ActorClass.Leader)
+        {
+            GameManager.Instance.isGameOver = true;
+            GameManager.Instance.playerActor.GetComponent<PlayerController>().enabled = false;
+            GameManager.Instance.playerActor.GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+     
     }
    
 

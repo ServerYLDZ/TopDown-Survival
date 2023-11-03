@@ -17,6 +17,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform []actorFolowPlayerPos;
     public bool[] isActorFolowPlayerPosUseForNow;
 
+    public bool isGameOver = false;
     public void OpenInventor()
     {
         InventoryTAB.SetActive(true);
