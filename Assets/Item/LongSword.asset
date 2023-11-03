@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e438b9ef9f847240910bbba92618940, type: 3}
   m_Name: LongSword
   m_EditorClassIdentifier: 
-  type: 0
-  prefab: {fileID: 0}
+  type: 4
+  prefab: {fileID: 8519561231196298165, guid: 3559038f91ad18e488c7bba365353329, type: 3}
   stackable: 0
   usable: 0
-  count: 0
-  image: {fileID: 0}
+  count: 1
+  image: {fileID: 21300000, guid: 8a6cca56e2b63344eb4769cd92d93ffb, type: 3}
   description: 
-  Name: 
+  Name: Long Sword
