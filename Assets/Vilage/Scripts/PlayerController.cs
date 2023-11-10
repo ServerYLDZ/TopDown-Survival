@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
    [SerializeField] ParticleSystem hitEffect;
    public bool playerBusy = false;
     [SerializeField] float InteractDistance = 1.5f;
+    [SerializeField] float FarmDistance = 3;
     float lookRotationSpeed = 8f;
 
   
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
             target = hit.transform.GetComponent<Interactable>();
             if (clickEffect != null)
             { Instantiate(clickEffectTarget, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
+            
         }
     }
 
@@ -84,7 +86,10 @@ public class PlayerController : MonoBehaviour
         {
             dis =GetComponent<Ally>().weapon.attackDistance;
         }
-          
+        else if (target.interactionType == InteractableType.AsignedOnject)
+        {
+            dis = FarmDistance;
+        }
         else
             dis = InteractDistance;
         if (Vector3.Distance(target.transform.position, transform.position) <= dis)
@@ -157,6 +162,24 @@ public class PlayerController : MonoBehaviour
                 target.InteractWithAlly();
                 target = null;
                 Invoke(nameof(ResetBusyState), 0.5f);
+                break;
+            case InteractableType.AsignedOnject:
+                agent.SetDestination(transform.position); //durdur
+                Invoke(nameof(ResetBusyState), 0.2f);
+                switch (target.asignedObjectType)
+                {
+                    case AsignedObjectType.None:
+                        break;
+                    case AsignedObjectType.Farm:
+                        GameManager.Instance.OpenFarmAssignPanel();
+                        
+                        break;
+                    default:
+                        break;
+                }
+                target = null;
+
+               
                 break;
         }
     }

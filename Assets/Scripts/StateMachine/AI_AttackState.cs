@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Aİ_AttackState : AI_State
+public class AI_AttackState : AI_State
 {
     public AI_State followState;
     public AI_State followAttackState;
@@ -15,11 +15,12 @@ public class Aİ_AttackState : AI_State
     {
        thisActor = actor;
 
- 
 
+    
 
-        if (actor.target)
+        if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target)
         {
+            if(actor.target)
             if (!actor.target.GetComponent<Enemy>())
             {
                 actor.actorBusy = false;

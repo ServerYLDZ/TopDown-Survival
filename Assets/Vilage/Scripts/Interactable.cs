@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InteractableType { Enemy, Item,Ally }
+public enum InteractableType { Enemy, Item,Ally,AsignedOnject }
+public enum AsignedObjectType {None, Farm, }
 public class Interactable : MonoBehaviour
 {
 
@@ -10,7 +11,7 @@ public class Interactable : MonoBehaviour
     public Ally myAlly { get; private set; }
 
     public InteractableType interactionType;
-
+    public AsignedObjectType asignedObjectType;
     void Awake()
     {
         if (interactionType == InteractableType.Enemy)
@@ -55,7 +56,9 @@ public class Interactable : MonoBehaviour
         {
             
             myAlly.currentState = ActorState.Follow;
-            ActorControlPanel.Instance.AddActorControlPrefab(myAlly);
+            myAlly.actorControlItem = GameManager.Instance.ActorControler.AddActorControlPrefab(myAlly);
+        
+           // ActorControlPanel.Instance.AddActorControlPrefab(myAlly);
          
             //effect girer 
         }

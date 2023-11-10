@@ -18,6 +18,7 @@ public class Enemy : Actor
     private Vector3 StartPoint;
     public float followMaxRange = 10;
     private bool getingHit;
+    private bool isDead;
     private void Start()
     {
         animController = GetComponent<AnimationsController>();
@@ -45,7 +46,7 @@ public class Enemy : Actor
     void FollowTarget()
     {
        float dis;
-        if (getingHit) return;
+        if (isDead) return;
         if (target == null)
         {
             targets.RemoveRange(0, targets.Count);
@@ -166,11 +167,14 @@ public class Enemy : Actor
                
             }
         }
-        
-        getingHit = true;
-        agent.SetDestination(transform.position);
-        animController.Hit();
-        Invoke("ResetActorBustState", .5f);
+        if (!getingHit)
+        {
+            getingHit = true;
+            agent.SetDestination(transform.position);
+            animController.Hit();
+            Invoke("ResetActorBustState",.3f);
+        }
+      
         
         if (currentHealth <= 0)
         { Death(); }
@@ -184,6 +188,7 @@ public class Enemy : Actor
                 GameManager.Instance.playerActor.GetComponent<PlayerController>().target = enemy.transform.GetComponent<Interactable>();
             }
         }
+        isDead = true;
         agent.SetDestination(transform.position);
         this.enabled=false;
         animController.SetDead();

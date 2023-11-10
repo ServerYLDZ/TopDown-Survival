@@ -5,7 +5,7 @@ using UnityEngine;
 public class AI_FollowState : AI_State
 {
     public AI_State followAttackTargetState;
-    
+    public AI_State FarmState;
     public override AI_State RunState(Ally actor)
     {
         if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target) 
@@ -16,7 +16,11 @@ public class AI_FollowState : AI_State
                 GameManager.Instance.IsActorFolowPlayerPosUseForNow();
             return followAttackTargetState;
         }
+        if (actor.currentState == ActorState.Farming)
+        {
 
+            return FarmState;
+        }
 
         //dusman varsa saldit satate gecer
         actor.FollowPlayer();

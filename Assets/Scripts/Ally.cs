@@ -8,8 +8,8 @@ public class Ally : Actor
     const string IDLE = "Idle";
     const string WALK = "Walk";
 
-    
 
+    public ActorControlItem actorControlItem;
     public ActorInfoPanel InfoPanel;
     public Transform weponTransform;
     public Sprite ClassSprite;
