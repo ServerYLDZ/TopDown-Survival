@@ -22,7 +22,7 @@ public class AI_FollowState : AI_State
             return FarmState;
         }
 
-        //dusman varsa saldit satate gecer
+        
         actor.FollowPlayer();
         return this;
     }

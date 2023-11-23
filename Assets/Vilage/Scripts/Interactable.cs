@@ -34,7 +34,17 @@ public class Interactable : MonoBehaviour
             }
                
         }
-     if(GetComponent<ItemBase>().item.type == ItemTpe.Food)
+        if (GetComponent<ItemBase>().item.type == ItemTpe.Armor)
+        {
+
+            if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+            {
+                
+                Destroy(gameObject);
+            }
+
+        }
+        if (GetComponent<ItemBase>().item.type == ItemTpe.Food)
         {
             if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
             {

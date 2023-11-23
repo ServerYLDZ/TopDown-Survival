@@ -18,8 +18,9 @@ public class Ally : Actor
     public float FixSpeed;
     public float HealSpeed;
     public float Hunger;
+  [HideInInspector]  public float MaxHunger = 100;
     public string ActName;
-
+   [HideInInspector] public int AllyIndex;
     public ParticleSystem hitEffect;
 
  
@@ -30,13 +31,13 @@ public class Ally : Actor
     void Start()
     {
         StartCoroutine(SetAnimationSlowly());
-       
+        InvokeRepeating(nameof(DecreseHunger), 0, 100);
     }
 
    
     public override void TakeDamage(int amount)
     {
-
+        if (currentHealth > 0 && currentHealth < maxHealth)  //karakterin cani max healti gecemez
         currentHealth -= amount;
 
         if (currentHealth <= 0)
@@ -47,16 +48,20 @@ public class Ally : Actor
         base.Death();
     }
 
-    public void FollowPlayer()
+    public override void FollowPlayer()
     {
 
         if (myClass != ActorClass.Leader && ActorState.Follow == currentState && !target && myClass != ActorClass.Enemy) //targeti daha sonradan degismeyi ve false yapmayi unutma
         {
+          
             for (int i = 0; i < GameManager.Instance.isActorFolowPlayerPosUseForNow.Length; i++) //bos nokta bul ve oraya git
             {
+                
                 if (GameManager.Instance.isActorFolowPlayerPosUseForNow[i] == false)
                 {
+                    
                     target = GameManager.Instance.actorFolowPlayerPos[i];
+                    AllyIndex = i;
                     GameManager.Instance.isActorFolowPlayerPosUseForNow[i] = true;
                     break;
                 }
@@ -81,6 +86,26 @@ public class Ally : Actor
         { animator.Play(IDLE); }
         else
         { animator.Play(WALK); }
+
+    }
+    public void DecreseHunger()
+    {
+        
+        if (Hunger <= 0)
+        {
+
+            Hunger = 0;
+            currentHealth--;
+            if (currentHealth <= 0)
+            {
+                Death();
+            }
+           
+        }
+        else
+        {
+            Hunger--;
+        }
 
     }
     public IEnumerator SetAnimationSlowly()

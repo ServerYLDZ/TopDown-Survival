@@ -13,7 +13,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public int slotIndex = 0;
     public DragDropManager dragableitem;
     public ItemSlotType slotType;
-    //public Actor owner;
+  
     public void OnDrop(PointerEventData eventData)
     {
         if (slotType == ItemSlotType.EnvanterSlot)

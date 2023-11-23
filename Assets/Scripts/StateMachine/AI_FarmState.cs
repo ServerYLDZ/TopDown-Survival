@@ -9,6 +9,8 @@ public class AI_FarmState : AI_State
     {
         if (actor.currentState == ActorState.Follow)
         {
+            actor.target = null;
+            actor.actorBusy = false;
             return followState;
         }
 

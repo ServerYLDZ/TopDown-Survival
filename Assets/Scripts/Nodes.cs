@@ -16,6 +16,11 @@ public class Nodes : MonoBehaviour
                 
                 StartCoroutine(ChangeTarget(other.GetComponent<Ally>()));
             }
+            else
+            {
+                StopAllCoroutines();
+                other.GetComponent<Ally>().FollowPlayer();
+            }
        
         }
     }

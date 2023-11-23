@@ -9,7 +9,8 @@ public enum ItemTpe
     Wood,
     Watter,
     Item,
-    Weapon
+    Weapon,
+    Armor
 }
 public class Envanter : MonoBehaviour
 {

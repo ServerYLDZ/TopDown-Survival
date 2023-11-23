@@ -40,7 +40,7 @@ public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHan
       
         cncsGroup = GetComponent<CanvasGroup>();
     }
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData) //kullan ve cikar
     {
         
         if (eventData.clickCount >= 2 &&  item.name != "Hand")

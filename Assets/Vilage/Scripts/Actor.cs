@@ -74,7 +74,7 @@ public class Actor : MonoBehaviour
    
 
 
-    public void FollowPlayer()
+    public virtual void FollowPlayer()
     {
 
         if (myClass != ActorClass.Leader &&ActorState.Follow==currentState&&!target && myClass != ActorClass.Enemy) //targeti daha sonradan degismeyi ve false yapmayi unutma

@@ -42,7 +42,7 @@ public class FarmAssignPanel : MonoBehaviour, IDropHandler
                 {
                     itm.ally.currentState = ActorState.Farming;
                     AddActorFarmerPrefab(itm.ally);
-
+                    GameManager.Instance.isActorFolowPlayerPosUseForNow[itm.ally.AllyIndex]= false;
                     Destroy(itm.gameObject);
                     GameManager.Instance.farm.currentWorkerCount++;
                     informaionText.text = "";
