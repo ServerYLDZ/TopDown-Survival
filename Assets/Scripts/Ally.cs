@@ -12,6 +12,7 @@ public class Ally : Actor
     public ActorControlItem actorControlItem;
     public ActorInfoPanel InfoPanel;
     public Transform weponTransform;
+    public Transform shieldTransform;
     public Sprite ClassSprite;
     public float FarmSpeed;
     public float WoodSpeed;
@@ -25,8 +26,12 @@ public class Ally : Actor
 
  
     public Weapon weapon;
-    public ItemSlot weponSlot;
-   
+    public WeaponSlot weponSlot;
+    public HeadSlot headSlot;
+    public ChestSlot chestSlot;
+    public ShieldSlot slieldSlot;
+    public FootSlot footSlot;
+
 
     void Start()
     {

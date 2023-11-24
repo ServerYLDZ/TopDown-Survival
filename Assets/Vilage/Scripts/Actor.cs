@@ -26,7 +26,7 @@ public class Actor : MonoBehaviour
     public int maxHealth;
    
     public ActorClass myClass;
-    
+    public int armor;
    
    public int currentHealth;
   

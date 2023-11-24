@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler,IEndDragHandler
+public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler,IPointerClickHandler
 {
     [SerializeField] Canvas canvas;
  
@@ -40,86 +40,196 @@ public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHan
       
         cncsGroup = GetComponent<CanvasGroup>();
     }
-    public void OnPointerDown(PointerEventData eventData) //kullan ve cikar
+   
+    public void OnPointerClick(PointerEventData eventData)
     {
         
-        if (eventData.clickCount >= 2 &&  item.name != "Hand")
-        {
-            //use
-            if (transform.parent.GetComponent<ItemSlot>().slotType== ItemSlotType.EnvanterSlot)
-            {
-                if (item.type == ItemTpe.Weapon)
-                {
-                    if (GameManager.Instance.CurrentActor.weponSlot.dragableitem == null) //el bossa
-                    {
-                        transform.parent.GetComponent<ItemSlot>().dragableitem = null;
-                        item.prefab.UseItem(GameManager.Instance.CurrentActor);
-                        transform.SetParent(GameManager.Instance.CurrentActor.weponSlot.transform);
-                        transform.parent.GetComponent<ItemSlot>().dragableitem = this;
-                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
-                    }
-                    else//el doluysa yer degis
-                    {
-                        transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.weponSlot.dragableitem;
-                        item.prefab.UseItem(GameManager.Instance.CurrentActor);
-                        GameManager.Instance.CurrentActor.weponSlot.transform.GetChild(0).transform.SetParent(transform.parent);
-                        transform.SetParent(GameManager.Instance.CurrentActor.weponSlot.transform);
-                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
-                    }
+       if (eventData.clickCount == 2 && item.name != "Hand")
+       {
+
+           //use
+           if (transform.parent.GetComponent<ItemSlot>())
+           {
+               if (item.type == ItemTpe.Weapon)
+               {
+
+                   if (GameManager.Instance.CurrentActor.weponSlot.dragableitem == null) //el bossa
+                   {
+
+                       transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                       item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                       transform.SetParent(GameManager.Instance.CurrentActor.weponSlot.transform);
+                       transform.parent.GetComponent<WeaponSlot>().dragableitem = this;
+                       GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                   }
+                   else//el doluysa yer degis
+                   {
+                       transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.weponSlot.dragableitem;
+                       item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                       GameManager.Instance.CurrentActor.weponSlot.transform.GetChild(0).transform.SetParent(transform.parent);
+                       transform.SetParent(GameManager.Instance.CurrentActor.weponSlot.transform);
+                       GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                   }
 
 
-                }
-                else if (item.type == ItemTpe.Food)
-                {
-                    item.prefab.UseItem(GameManager.Instance.CurrentActor);
-                    amount--;
-                    amountTexxt.text = amount.ToString();
-                    transform.parent.GetComponent<ItemSlot>().dragableitem = null;
-                    if (amount <= 0)
-                      Destroy(this.gameObject);
+               }
+               else if (item.type == ItemTpe.Armor) // tpine gore armor giy
+               {
 
-                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
-                }
-                else if (item.type == ItemTpe.Wood)
-                {
-                    item.prefab.UseItem(GameManager.Instance.CurrentActor);
-                    amount--;
-                    amountTexxt.text = amount.ToString();
-                    transform.parent.GetComponent<ItemSlot>().dragableitem = null;
-                    if (amount <= 0)
-                        Destroy(this.gameObject);
+                    switch (item.prefab.GetComponent<Armor>().armorType)
+                   {
+                       case Armor.ArmorType.Shield:
 
-                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
-                }
-                //diger nesnelerle etkilesim burdan kontrol edilcek
-            }
-            else
-            {
-                if (item.type == ItemTpe.Weapon)
-                {
-                    transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                           if (GameManager.Instance.CurrentActor.slieldSlot.dragableitem == null) //el bossa
+                           {
 
-                    GameManager.Instance.CurrentActor.weapon = GameManager.Instance.HandWepon;
+                               transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                               item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                               transform.SetParent(GameManager.Instance.CurrentActor.slieldSlot.transform);
+                               transform.parent.GetComponent<ShieldSlot>().dragableitem = this;
+                               GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                           }
+                           else//el doluysa yer degis
+                           {
+
+                               GameManager.Instance.CurrentActor.slieldSlot.dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                                Debug.Log(GameManager.Instance.CurrentActor.slieldSlot.dragableitem.item.prefab);
+                               transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.slieldSlot.dragableitem;
+                               item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                               GameManager.Instance.CurrentActor.slieldSlot.transform.GetChild(0).transform.SetParent(transform.parent);
+                               transform.SetParent(GameManager.Instance.CurrentActor.slieldSlot.transform);
+                                GameManager.Instance.CurrentActor.slieldSlot.dragableitem = this;
+                               GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                           }
+
+                           break;
+                       case Armor.ArmorType.Head:
+                           break;
+                       case Armor.ArmorType.Chest:
+                           break;
+                       case Armor.ArmorType.Foot:
+                           break;
+                       default:
+                           break;
+                   }
+
+               }
+               else if (item.type == ItemTpe.Food)
+               {
+                   item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                   amount--;
+                   amountTexxt.text = amount.ToString();
+                   transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                   if (amount <= 0)
+                       Destroy(this.gameObject);
+
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+               }
+               else if (item.type == ItemTpe.Wood)
+               {
+                   item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                   amount--;
+                   amountTexxt.text = amount.ToString();
+                   transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                   if (amount <= 0)
+                       Destroy(this.gameObject);
+
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+               }
+               //diger nesnelerle etkilesim burdan kontrol edilcek
+           }
+           else if(transform.parent.GetComponent<WeaponSlot>())
+           {
+               if (item.type == ItemTpe.Weapon)
+               {
+                   transform.parent.GetComponent<WeaponSlot>().dragableitem = null;
+
+                   GameManager.Instance.CurrentActor.weapon = GameManager.Instance.HandWepon;
+                   if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
+                       Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                   transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
+                   GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+
+               }
+
+           }
+           else if (transform.parent.GetComponent<ShieldSlot>()) //----------------------------------------------------------------
+           {
+               if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType==Armor.ArmorType.Shield)
+               {
+                  this.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                    Debug.Log(this.item.prefab);
+                    transform.parent.GetComponent<ShieldSlot>().dragableitem = null;
+                 
+                   //zirhi cikar kodunu yaz   ve kalkan yok et
+
+                   transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
+                   GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+
+               }
+
+           }
+           else if (transform.parent.GetComponent<HeadSlot>()) //----------------------------------------------------------------
+           {
+               if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Head)
+               {
+                   transform.parent.GetComponent<HeadSlot>().dragableitem = null;
+
+                   //zirhi cikar kodunu yaz   ve kalkan yok et
+                     if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
+                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                   transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
+                   GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+
+               }
+
+           }
+           else if (transform.parent.GetComponent<ChestSlot>()) //----------------------------------------------------------------
+           {
+               if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Chest)
+               {
+                   transform.parent.GetComponent<ChestSlot>().dragableitem = null;
+
+                   //zirhi cikar kodunu yaz   ve kalkan yok et
                     if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
-                     Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
-                    transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform); 
-                    GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                   transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
+                   GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
-                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+               }
 
-                }
+           }
+           else if (transform.parent.GetComponent<FootSlot>()) //----------------------------------------------------------------
+           {
+               if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Foot)
+               {
+                   transform.parent.GetComponent<FootSlot>().dragableitem = null;
 
-            }
+                   //zirhi cikar kodunu yaz   ve kalkan yok et
+                    if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
+                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                   transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
+                   GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
+                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
-   
-        }
-      
+               }
 
+           }
+
+
+       }
+           
     }
 
-   public void OnBeginDrag(PointerEventData eventData)
+
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        if (transform.parent.GetComponent<ItemSlot>().slotType == ItemSlotType.WeaponSlot)
+        if (transform.parent.GetComponent<WeaponSlot>())
         {
          
           
@@ -128,6 +238,8 @@ public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHan
          
 
         }
+
+
         if (item.name != "Hand")
         {
             oldParent = transform.parent;
@@ -159,36 +271,37 @@ public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHan
         }
 
         StartCoroutine(FixWeapon());
-           
-           
-    
-       
+     
+
+
+
+
     }
     
 
     IEnumerator FixWeapon()
     {
         yield return new WaitForSeconds(.3f);
-
-        if (ItemSlotType.WeaponSlot == oldParent.GetComponent<ItemSlot>().slotType && ItemSlotType.EnvanterSlot == parentAfterDrag.GetComponent<ItemSlot>().slotType) //çektiğimyer wepon slot ve koydugum envanter slotsa
+        
+        if ( oldParent.GetComponent<WeaponSlot>() &&  parentAfterDrag.GetComponent<ItemSlot>()) //çektiğimyer wepon slot ve koydugum envanter slotsa
         {
             if (oldParent.childCount == 0)
             {
-                oldParent.GetComponent<ItemSlot>().dragableitem = null;
+                oldParent.GetComponent<WeaponSlot>().dragableitem = null;
                 parentAfterDrag.GetComponent<ItemSlot>().dragableitem = this;
                 GameManager.Instance.HandWepon.UseItem(GameManager.Instance.CurrentActor);
                 GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
             }//elim bosaltilir
                
         }
-        else if (ItemSlotType.EnvanterSlot == oldParent.GetComponent<ItemSlot>().slotType && ItemSlotType.WeaponSlot == parentAfterDrag.GetComponent<ItemSlot>().slotType) //envanter cekip slota koyma
+        else if (oldParent.GetComponent<ItemSlot>() && parentAfterDrag.GetComponent<WeaponSlot>()) //envanter cekip slota koyma
         {
             oldParent.GetComponent<ItemSlot>().dragableitem = null;
-            parentAfterDrag.GetComponent<ItemSlot>().dragableitem = this;
+            parentAfterDrag.GetComponent<WeaponSlot>().dragableitem = this;
             item.prefab.UseItem(GameManager.Instance.CurrentActor);
             GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
         }
-        else if (parentAfterDrag == oldParent && oldParent.GetComponent<ItemSlot>().slotType== ItemSlotType.WeaponSlot ) //drag iptalse  ve silah kısmıysa kullan tekrar ayni silahi
+        else if (parentAfterDrag == oldParent && oldParent.GetComponent<WeaponSlot>()) //drag iptalse  ve silah kısmıysa kullan tekrar ayni silahi
         {   
 
             item.prefab.UseItem(GameManager.Instance.CurrentActor);
@@ -197,5 +310,6 @@ public class DragDropManager : MonoBehaviour, IPointerDownHandler, IBeginDragHan
        
     }
   
-   
+
+
 }
