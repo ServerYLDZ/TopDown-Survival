@@ -104,11 +104,75 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
 
                            break;
                        case Armor.ArmorType.Head:
-                           break;
+                            if (GameManager.Instance.CurrentActor.headSlot.dragableitem == null) //el bossa
+                            {
+
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                transform.SetParent(GameManager.Instance.CurrentActor.headSlot.transform);
+                                transform.parent.GetComponent<HeadSlot>().dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            else//el doluysa yer degis
+                            {
+
+                                GameManager.Instance.CurrentActor.headSlot.dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                                Debug.Log(GameManager.Instance.CurrentActor.headSlot.dragableitem.item.prefab);
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.headSlot.dragableitem;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                GameManager.Instance.CurrentActor.headSlot.transform.GetChild(0).transform.SetParent(transform.parent);
+                                transform.SetParent(GameManager.Instance.CurrentActor.headSlot.transform);
+                                GameManager.Instance.CurrentActor.headSlot.dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            break;
                        case Armor.ArmorType.Chest:
-                           break;
+                            if (GameManager.Instance.CurrentActor.chestSlot.dragableitem == null) //el bossa
+                            {
+
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                transform.SetParent(GameManager.Instance.CurrentActor.chestSlot.transform);
+                                transform.parent.GetComponent<ChestSlot>().dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            else//el doluysa yer degis
+                            {
+
+                                GameManager.Instance.CurrentActor.chestSlot.dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                                Debug.Log(GameManager.Instance.CurrentActor.chestSlot.dragableitem.item.prefab);
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.chestSlot.dragableitem;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                GameManager.Instance.CurrentActor.chestSlot.transform.GetChild(0).transform.SetParent(transform.parent);
+                                transform.SetParent(GameManager.Instance.CurrentActor.chestSlot.transform);
+                                GameManager.Instance.CurrentActor.chestSlot.dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            break;
                        case Armor.ArmorType.Foot:
-                           break;
+
+                            if (GameManager.Instance.CurrentActor.footSlot.dragableitem == null) //el bossa
+                            {
+
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                transform.SetParent(GameManager.Instance.CurrentActor.footSlot.transform);
+                                transform.parent.GetComponent<FootSlot>().dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            else//el doluysa yer degis
+                            {
+
+                                GameManager.Instance.CurrentActor.footSlot.dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                                Debug.Log(GameManager.Instance.CurrentActor.footSlot.dragableitem.item.prefab);
+                                transform.parent.GetComponent<ItemSlot>().dragableitem = GameManager.Instance.CurrentActor.footSlot.dragableitem;
+                                item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                                GameManager.Instance.CurrentActor.footSlot.transform.GetChild(0).transform.SetParent(transform.parent);
+                                transform.SetParent(GameManager.Instance.CurrentActor.footSlot.transform);
+                                GameManager.Instance.CurrentActor.footSlot.dragableitem = this;
+                                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                            }
+                            break;
                        default:
                            break;
                    }
@@ -176,11 +240,11 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
            {
                if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Head)
                {
-                   transform.parent.GetComponent<HeadSlot>().dragableitem = null;
+                    this.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                    transform.parent.GetComponent<HeadSlot>().dragableitem = null;
 
                    //zirhi cikar kodunu yaz   ve kalkan yok et
-                     if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
-                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                   
                    transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
                    GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
@@ -192,11 +256,11 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
            {
                if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Chest)
                {
-                   transform.parent.GetComponent<ChestSlot>().dragableitem = null;
+                    this.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                    transform.parent.GetComponent<ChestSlot>().dragableitem = null;
 
                    //zirhi cikar kodunu yaz   ve kalkan yok et
-                    if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
-                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                    
                    transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
                    GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
@@ -208,11 +272,11 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
            {
                if (item.type == ItemTpe.Armor && item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Foot)
                {
-                   transform.parent.GetComponent<FootSlot>().dragableitem = null;
+                    this.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar eskisini
+                    transform.parent.GetComponent<FootSlot>().dragableitem = null;
 
                    //zirhi cikar kodunu yaz   ve kalkan yok et
-                    if (GameManager.Instance.CurrentActor.weponTransform.childCount > 0)
-                         Destroy(GameManager.Instance.CurrentActor.weponTransform.GetChild(0).gameObject);
+                  
                    transform.SetParent(GameManager.Instance.Inventer.RetrunEmptySlot().transform);
                    GameManager.Instance.Inventer.RetrunEmptySlot().dragableitem = this;
                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();

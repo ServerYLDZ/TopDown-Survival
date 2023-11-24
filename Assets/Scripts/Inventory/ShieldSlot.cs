@@ -36,6 +36,7 @@ public class ShieldSlot : MonoBehaviour, IDropHandler
 
                     itm.item.prefab.UseItem(GameManager.Instance.CurrentActor);
                     GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                   
                     //yer degistirme
                 }
             }

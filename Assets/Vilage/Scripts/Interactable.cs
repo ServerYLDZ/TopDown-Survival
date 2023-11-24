@@ -39,7 +39,7 @@ public class Interactable : MonoBehaviour
 
             if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
             {
-                
+                Debug.Log("hi");
                 Destroy(gameObject);
             }
 

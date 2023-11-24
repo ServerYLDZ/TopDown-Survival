@@ -13,6 +13,7 @@ public class Ally : Actor
     public ActorInfoPanel InfoPanel;
     public Transform weponTransform;
     public Transform shieldTransform;
+    public Transform HeadTransform;
     public Sprite ClassSprite;
     public float FarmSpeed;
     public float WoodSpeed;
@@ -42,7 +43,7 @@ public class Ally : Actor
    
     public override void TakeDamage(int amount)
     {
-        if (currentHealth > 0 && currentHealth < maxHealth)  //karakterin cani max healti gecemez
+        if (currentHealth > 0 && currentHealth <=maxHealth)  //karakterin cani max healti gecemez
         currentHealth -= amount;
 
         if (currentHealth <= 0)

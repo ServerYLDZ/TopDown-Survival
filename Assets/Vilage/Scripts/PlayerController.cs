@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case InteractableType.Item:
 
+                Debug.Log("HI");
                 target.InteractWithItem();
                 target = null;
 

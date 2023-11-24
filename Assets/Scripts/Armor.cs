@@ -38,10 +38,26 @@ public class Armor : ItemBase
          
                 break;
             case ArmorType.Head:
+                if (armorMesh != null)
+                {
+                    GameObject shield = Instantiate(armorMesh, act.HeadTransform);
+                    act.armor += armor;
+                    act.maxHealth += Health;
+                    act.currentHealth += Health;
+                    act.agent.speed += speed;
+                }
                 break;
             case ArmorType.Chest:
+                act.armor += armor;
+                act.maxHealth += Health;
+                act.currentHealth += Health;
+                act.agent.speed += speed;
                 break;
             case ArmorType.Foot:
+                act.armor += armor;
+                act.maxHealth += Health;
+                act.currentHealth += Health;
+                act.agent.speed += speed;
                 break;
             default:
                 break;
@@ -64,8 +80,12 @@ public class Armor : ItemBase
             Debug.Log(act.shieldTransform.GetChild(0).gameObject);
             Destroy(act.shieldTransform.GetChild(0).gameObject);
         }
-            
-        
-    
+        if (armorType == ArmorType.Head && act.HeadTransform.childCount > 0)
+        {
+            Debug.Log(act.HeadTransform.GetChild(0).gameObject);
+            Destroy(act.HeadTransform.GetChild(0).gameObject);
+        }
+
+
     }
 }

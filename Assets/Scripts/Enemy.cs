@@ -17,7 +17,7 @@ public class Enemy : Actor
     public Enemy[] enemyAllys;
     private Vector3 StartPoint;
     public float followMaxRange = 10;
-    private bool getingHit;
+ 
     private bool isDead;
     private void Start()
     {
@@ -128,7 +128,6 @@ public class Enemy : Actor
 
         Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         target.GetComponent<Ally>().TakeDamage(attackDamage);
-
         
     }
 
@@ -167,13 +166,12 @@ public class Enemy : Actor
                
             }
         }
-        if (!getingHit)
-        {
-            getingHit = true;
+       
+            
             agent.SetDestination(transform.position);
-            animController.Hit();
-            Invoke("ResetActorBustState",.3f);
-        }
+
+          
+        
       
         
         if (currentHealth <= 0)
@@ -199,17 +197,14 @@ public class Enemy : Actor
     {
     
         if (actorBusy) return;
-        if (getingHit) return;
+        
         if (agent.velocity == Vector3.zero)
         { animController.SetMovingState(false); }
         else
         { animController.SetMovingState(true); }
 
     }
-    void ResetActorBustState()
-    {
-       getingHit = false;
-    }
+
     private void Update()
     {
        

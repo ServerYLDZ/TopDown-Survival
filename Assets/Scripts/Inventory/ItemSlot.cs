@@ -93,15 +93,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             if (eventData.pointerDrag != null)
             {
                 GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
-                if (transform.childCount == 0) //el bossa
+                if (dragableitem==null) //el bossa
                 {
                     itm.oldParent.GetComponent<ShieldSlot>().dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
                     itm.oldParent.GetComponent<ShieldSlot>().dragableitem = null;
                
                     dragableitem = itm;
                     itm.parentAfterDrag = transform;
-              
-                    
+
+                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
                 }
                 else
@@ -122,7 +122,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                         if (transform.childCount > 0)
                             transform.GetChild(0).SetParent(itm.oldParent);
                         itm.oldParent.GetComponent<ShieldSlot>().dragableitem = tmpıtem;
-
+                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
                         //yer degistirme
 
@@ -138,28 +138,41 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             if (eventData.pointerDrag != null)
             {
-                GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+                
                 if (transform.childCount == 0) //el bossa
                 {
+                    itm.oldParent.GetComponent<HeadSlot>().dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
                     itm.oldParent.GetComponent<HeadSlot>().dragableitem = null;
+
                     dragableitem = itm;
                     itm.parentAfterDrag = transform;
 
+                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
                 }
                 else
                 {
-                    if (dragableitem.item.type == ItemTpe.Armor && dragableitem.item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Head) //ustundeki weoponsa yerdegis deilse gei koyama;
+                    if (dragableitem.item.type == ItemTpe.Armor && dragableitem.item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Head) //ustundeki shield yerdegis deilse gei koyama;
                     {
-                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor);
+
+                        itm.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
+                        Debug.Log(itm.item.prefab.GetComponent<Armor>().gameObject);
+
+                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor); //yeni zirh tak
                         GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
+                        DragDropManager tmpıtem = dragableitem;
                         dragableitem = itm;
+
                         itm.parentAfterDrag = transform;
                         if (transform.childCount > 0)
                             transform.GetChild(0).SetParent(itm.oldParent);
+                        itm.oldParent.GetComponent<HeadSlot>().dragableitem = tmpıtem;
 
+                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                         //yer degistirme
+
+
 
                     }
 
@@ -174,6 +187,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                 if (transform.childCount == 0) //el bossa
                 {
+                    itm.oldParent.GetComponent<ChestSlot>().dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
                     itm.oldParent.GetComponent<ChestSlot>().dragableitem = null;
                     dragableitem = itm;
                     itm.parentAfterDrag = transform;
@@ -184,15 +198,23 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 {
                     if (dragableitem.item.type == ItemTpe.Armor && dragableitem.item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Chest) //ustundeki weoponsa yerdegis deilse gei koyama;
                     {
-                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                        itm.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
+                        Debug.Log(itm.item.prefab.GetComponent<Armor>().gameObject);
+
+                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor); //yeni zirh tak
                         GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
+                        DragDropManager tmpıtem = dragableitem;
                         dragableitem = itm;
+
                         itm.parentAfterDrag = transform;
                         if (transform.childCount > 0)
                             transform.GetChild(0).SetParent(itm.oldParent);
+                        itm.oldParent.GetComponent<HeadSlot>().dragableitem = tmpıtem;
 
+                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                         //yer degistirme
+
 
                     }
 
@@ -207,6 +229,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                 if (transform.childCount == 0) //el bossa
                 {
+                    itm.oldParent.GetComponent<ChestSlot>().dragableitem.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
                     itm.oldParent.GetComponent<FootSlot>().dragableitem = null;
                     dragableitem = itm;
                     itm.parentAfterDrag = transform;
@@ -217,14 +240,21 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 {
                     if (dragableitem.item.type == ItemTpe.Armor && dragableitem.item.prefab.GetComponent<Armor>().armorType == Armor.ArmorType.Foot) //ustundeki weoponsa yerdegis deilse gei koyama;
                     {
-                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor);
+                        itm.item.prefab.GetComponent<Armor>().UnUseArmor(GameManager.Instance.CurrentActor); //zirhi cikar
+                        Debug.Log(itm.item.prefab.GetComponent<Armor>().gameObject);
+
+                        dragableitem.item.prefab.UseItem(GameManager.Instance.CurrentActor); //yeni zirh tak
                         GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
 
+                        DragDropManager tmpıtem = dragableitem;
                         dragableitem = itm;
+
                         itm.parentAfterDrag = transform;
                         if (transform.childCount > 0)
                             transform.GetChild(0).SetParent(itm.oldParent);
+                        itm.oldParent.GetComponent<HeadSlot>().dragableitem = tmpıtem;
 
+                        GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                         //yer degistirme
 
                     }
