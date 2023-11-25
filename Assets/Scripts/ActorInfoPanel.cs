@@ -7,12 +7,13 @@ using TMPro;
 public class ActorInfoPanel : MonoBehaviour
 {
     public Ally targetActor;
+
     public TMP_Text Health;
     public TMP_Text myClass;
     public TMP_Text FarmSpeed;
     public TMP_Text WoodSpeed;
-    public TMP_Text FixSpeed;
-    public TMP_Text HealSpeed;
+    public TMP_Text Armor;
+    public TMP_Text Speed;
     public TMP_Text attackSpeed;
     public TMP_Text attackDistance;
     public TMP_Text attackDamage;
@@ -29,12 +30,13 @@ public class ActorInfoPanel : MonoBehaviour
     }
     public void SetInfoPanel()
     {
-        Health.text = targetActor.currentHealth.ToString();
+       
+        Health.text = targetActor.currentHealth.ToString()+"/"+targetActor.maxHealth.ToString();
         myClass.text = targetActor.myClass.ToString();
         FarmSpeed.text = targetActor.FarmSpeed.ToString();
         WoodSpeed.text = targetActor.WoodSpeed.ToString();
-        FixSpeed.text = targetActor.FixSpeed.ToString();
-        HealSpeed.text = targetActor.HealSpeed.ToString();
+        Armor.text = targetActor.armor.ToString();
+        Speed.text = targetActor.agent.speed.ToString();
         attackSpeed.text = targetActor.weapon.attackSpeed.ToString();
         attackDistance.text = targetActor.weapon.attackDistance.ToString();
         attackDamage.text = targetActor.weapon.attackDamage.ToString();

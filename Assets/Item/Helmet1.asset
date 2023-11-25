@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 3845319444661016399, guid: c691cbe53fbac594db964efe348070bd, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
-  description: 
-  Name: 
+  description: This Item Portect Your Head
+  Name: Thif's Helmet

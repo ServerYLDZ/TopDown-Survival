@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 7859411107684901514, guid: 795a1839a090b7345971f68a3681fad3, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 0
   image: {fileID: 21300000, guid: 42d45b97073618b42bfcfc22740c4bc7, type: 3}
-  description: 
-  Name: 
+  description: God Blass U ...
+  Name: God's Chest

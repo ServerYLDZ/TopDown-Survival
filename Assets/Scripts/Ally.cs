@@ -17,8 +17,6 @@ public class Ally : Actor
     public Sprite ClassSprite;
     public float FarmSpeed;
     public float WoodSpeed;
-    public float FixSpeed;
-    public float HealSpeed;
     public float Hunger;
   [HideInInspector]  public float MaxHunger = 100;
     public string ActName;
@@ -43,8 +41,31 @@ public class Ally : Actor
    
     public override void TakeDamage(int amount)
     {
-        if (currentHealth > 0 && currentHealth <=maxHealth)  //karakterin cani max healti gecemez
-        currentHealth -= amount;
+
+        if (currentHealth > 0 )//karakterin cani max healti gecemez
+        {
+            if (amount < 0)
+            {
+                //can dolduruyordur burdan devam ke
+                currentHealth -= amount;
+                if (currentHealth >= maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+            }
+            else
+            {
+                if (amount > armor)
+                {
+                    currentHealth -= amount - armor;
+                }
+                else
+                {
+                    currentHealth -= 0;
+                }
+            }
+        }
+      
 
         if (currentHealth <= 0)
         { Death(); }

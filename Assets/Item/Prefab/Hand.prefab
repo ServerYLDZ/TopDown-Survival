@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 1
+  asignedObjectType: 0
 --- !u!114 &3840153307266992034
 MonoBehaviour:
   m_ObjectHideFlags: 0

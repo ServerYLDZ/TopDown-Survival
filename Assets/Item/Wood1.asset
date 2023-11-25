@@ -18,5 +18,5 @@ MonoBehaviour:
   usable: 0
   count: 1
   image: {fileID: 21300000, guid: d98fbe17966d8ef449b25b99024bf36f, type: 3}
-  description: 
+  description: U can use this wood for build samething
   Name: Wood

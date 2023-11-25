@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler,IPointerClickHandler
+
+public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler,IPointerMoveHandler
 {
     [SerializeField] Canvas canvas;
  
@@ -16,7 +17,7 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
     public Image image;
     public TMP_Text amountTexxt;
     public int amount = 0;
-
+    GameObject popUp;
 
     private void OnEnable()
     {
@@ -50,7 +51,9 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
            //use
            if (transform.parent.GetComponent<ItemSlot>())
            {
-               if (item.type == ItemTpe.Weapon)
+                popUp.SetActive(false); //popup kapat
+                popUp.transform.SetParent(ObjectPool.Instance.transform);
+                if (item.type == ItemTpe.Weapon)
                {
 
                    if (GameManager.Instance.CurrentActor.weponSlot.dragableitem == null) //el bossa
@@ -373,7 +376,88 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
         }
        
     }
-  
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        popUp.SetActive(false);
+        popUp.transform.SetParent(ObjectPool.Instance.transform);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (popUp)
+        {
+            popUp.SetActive(false);
+            popUp.transform.SetParent(ObjectPool.Instance.transform);
+        }
+
+        popUp = ObjectPool.Instance.GetPooledObject(0);
+        popUp.transform.SetParent(GameManager.Instance.InventoryTAB.transform);
+        
+
+        RectTransform rectTransform= popUp.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2(0, 1);
+
+        ItemPopUp popUpData= popUp.GetComponent<ItemPopUp>();
+        popUpData.nameT.text = item.Name;
+        popUpData.desciriptionT.text = item.description;
+        if (!item.usable)
+        {
+            popUpData.usableT.gameObject.SetActive(false);
+        }
+    
+        if (item.type == ItemTpe.Weapon)
+        {
+            Weapon popW = item.prefab.GetComponent<Weapon>();
+            popUpData.BuffsT.text = 
+            "+ " + popW.attackDamage.ToString()+" Damage "+"\n" +
+            "+ " + popW.attackSpeed.ToString() + " Attack Speed " + "\n"+
+            "+ " + popW.attackDistance.ToString() + " AttackDistance " + "\n";
+        }
+        else if (item.type == ItemTpe.Armor)
+        {
+            Armor popA = item.prefab.GetComponent<Armor>();
+            popUpData.BuffsT.text =
+                "+ " + popA.Health.ToString() + " Health " + "\n" +
+                "+ " + popA.armor.ToString() + " Armor " + "\n";
+            if (popA.speed > 0)
+                popUpData.BuffsT.text += "+ " + popA.speed.ToString() + " Armor " + "\n";
+        }
+        else if (item.type == ItemTpe.Food)
+        {
+            Mashroom popM = item.prefab.GetComponent<Mashroom>();
+            switch (popM.type)
+            {
+                case MashroomType.HealtyMashroom:
+                    popUpData.BuffsT.text =
+                        "+" + popM.healEffectAmount.ToString() + " Health " + "\n"+
+                        "+" + popM.foodAmount.ToString() + " Starve " + "\n";
+                    break;
+                case MashroomType.UnHealtyMashroom:
+                          popUpData.BuffsT.text =
+                         "-" + popM.healEffectAmount.ToString() + " Health " + "\n" +
+                         "+" + popM.foodAmount.ToString() + " Starve " + "\n";
+                    break;
+                case MashroomType.BufferMushrom:
+                    break;
+            }
+        
+        }
+        else if (item.type == ItemTpe.Food)
+        {
+            popUpData.BuffsT.text = "U have:" + amount;
+        }
+        else 
+        {
+            popUpData.BuffsT.text = "";
+        }
 
 
+
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        popUp.transform.position = Input.mousePosition+new Vector3(10, -10,0);
+    }
 }

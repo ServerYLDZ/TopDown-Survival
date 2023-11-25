@@ -37,6 +37,14 @@ public class GameManager : MonoSingleton<GameManager>
     public void CloseInventor()
     {
         InventoryTAB.SetActive(false);
+
+        if (InventoryTAB.GetComponentInChildren<ItemPopUp>())
+        {
+            
+            InventoryTAB.GetComponentInChildren<ItemPopUp>().gameObject.SetActive(false); //pop up kapama
+         
+        }
+  
         inventortyOpen = !inventortyOpen;
         isOpenAnnyPanelNow = false;
         foreach (var actor in allActors) //tum diger panellerikapa

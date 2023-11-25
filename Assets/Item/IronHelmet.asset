@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 5980330540222783490, guid: 26561d2a3589e24488972e1d391465e1, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
-  description: 
+  description: This Item Portect Your Head
   Name: Iron Helmet

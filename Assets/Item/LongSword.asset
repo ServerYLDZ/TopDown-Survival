@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 4
   prefab: {fileID: 8519561231196298165, guid: 3559038f91ad18e488c7bba365353329, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: 8a6cca56e2b63344eb4769cd92d93ffb, type: 3}
-  description: 
+  description: Long Sword avantage long distance
   Name: Long Sword

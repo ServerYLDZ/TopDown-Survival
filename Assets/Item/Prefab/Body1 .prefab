@@ -128,6 +128,6 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 226f6a0d701c2ed4f81f9ccc70f4d223, type: 2}
   armorType: 2
   armorMesh: {fileID: 6416355780444932634, guid: 4e12ac8fd0818514c9ab8b1dcab6c0aa, type: 3}
-  Health: 10
-  armor: 5
+  Health: 5
+  armor: 3
   speed: 0

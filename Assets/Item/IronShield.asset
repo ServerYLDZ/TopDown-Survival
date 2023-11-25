@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 7159708521431322109, guid: 12f51825d66deb543a7bccd20d97d2b0, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: 3168140d6f409d0448447f18568d9482, type: 3}
-  description: 
+  description: This Item can Portect U and your all Ally
   Name: Iron Shield

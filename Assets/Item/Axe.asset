@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 4
   prefab: {fileID: 1803273590771948523, guid: 75c2df0893e98e449a0651bc58ee0627, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: 3086d66a563317b40a20a20da2c64ac0, type: 3}
-  description: 
+  description: 'U can use For Cutting Tree '
   Name: Axe

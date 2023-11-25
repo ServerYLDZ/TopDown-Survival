@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 4
   prefab: {fileID: 3840153307266992034, guid: a192e6151e1082b409e9154284e3bab0, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
-  description: "tek k\u0131l\u0131c\u0131"
-  Name: "uzun k\u0131l\u0131c"
+  description: 'Pawerfull Sword '
+  Name: White Sword

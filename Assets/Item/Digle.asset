@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 4
   prefab: {fileID: 4112526190126491578, guid: e191092d14a7c7b44b7279a35c0488ca, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: cdb88fdb0cf46b244a667edaff21c7df, type: 3}
-  description: 
-  Name: digle
+  description: Long Distance High Damage
+  Name: Digle

@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 5491124218298916186, guid: d630428dfef92b745a7fc3be1a29cfaf, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 0
   image: {fileID: 21300000, guid: 77a39e873655d3c4b93d0b7696397b83, type: 3}
-  description: 
-  Name: 
+  description: What a Greatfull Chest Portect  from your Enemy
+  Name: Server's Chest

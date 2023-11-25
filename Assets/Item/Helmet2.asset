@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 3534152240265033206, guid: 3139941deed02b44cb9e5b49cbda4b5e, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 1
   image: {fileID: 21300000, guid: a04ecc9d5e12d5d449077414eb86635e, type: 3}
-  description: 
-  Name: 
+  description: This Item Portect Your Head
+  Name: Farmer Hat

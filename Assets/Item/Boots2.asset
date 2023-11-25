@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 7894826141831042603, guid: c1966fb00e9a9754490ae695ac072392, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 0
   image: {fileID: 21300000, guid: ed64f3a17f2ede646be21ed6edc9161a, type: 3}
-  description: 
-  Name: 
+  description: 'This item can Make more Faster '
+  Name: Leopars Feet

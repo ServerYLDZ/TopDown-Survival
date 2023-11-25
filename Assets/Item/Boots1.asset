@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 5
   prefab: {fileID: 7971011305981620504, guid: b82a3fb0fd970724e92a4cd484188cb1, type: 3}
   stackable: 0
-  usable: 0
+  usable: 1
   count: 0
   image: {fileID: 21300000, guid: 7d0e1d7f7b2d33a4e9ac7321181fe22d, type: 3}
-  description: 
-  Name: 
+  description: This item can Make more Faster
+  Name: Thif's Feet
