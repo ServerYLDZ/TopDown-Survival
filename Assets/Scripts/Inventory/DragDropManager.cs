@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler,IPointerMoveHandler
 {
     [SerializeField] Canvas canvas;

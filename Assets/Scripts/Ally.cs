@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 public class Ally : Actor
 {
@@ -30,6 +30,9 @@ public class Ally : Actor
     public ChestSlot chestSlot;
     public ShieldSlot slieldSlot;
     public FootSlot footSlot;
+    public CanvasGroup Bar;
+    public RectTransform HealthBar;
+    public Transform ArmorBar;
 
 
     void Start()
@@ -37,7 +40,25 @@ public class Ally : Actor
         StartCoroutine(SetAnimationSlowly());
         InvokeRepeating(nameof(DecreseHunger), 0, 100);
     }
-
+    public void ArmorBarActive()
+    {
+        if (armor > 0)
+        {
+            ArmorBar.gameObject.SetActive(true);
+            for (int i = 0; i < ArmorBar.childCount; i++)
+            {
+                if (i <= armor)
+                    ArmorBar.GetChild(i).gameObject.SetActive(true);
+                else
+                    ArmorBar.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            ArmorBar.gameObject.SetActive(false);
+        }
+      
+    }
    
     public override void TakeDamage(int amount)
     {
@@ -50,14 +71,18 @@ public class Ally : Actor
                 currentHealth -= amount;
                 if (currentHealth >= maxHealth)
                 {
+                    HealthBar.DOScaleX(1, .5f);
                     currentHealth = maxHealth;
                 }
+              
             }
             else
             {
                 if (amount > armor)
                 {
                     currentHealth -= amount - armor;
+                    HealthBar.DOScaleX((float)currentHealth / (float)maxHealth, .5f);
+               
                 }
                 else
                 {
@@ -68,7 +93,11 @@ public class Ally : Actor
       
 
         if (currentHealth <= 0)
-        { Death(); }
+        {
+            HealthBar.DOScaleX(0, .5f);
+            currentHealth =0;
+            Death(); 
+        }
     }
     public override void Death()
     {

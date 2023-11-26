@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AI_FollowState : AI_State
 {
@@ -14,7 +15,9 @@ public class AI_FollowState : AI_State
                 actor.target = GameManager.Instance.playerActor.GetComponent<PlayerController>().target.transform;
                 
                 GameManager.Instance.IsActorFolowPlayerPosUseForNow();
-            return followAttackTargetState;
+                actor.Bar.DOFade(1, 1);
+               actor.ArmorBarActive();
+                return followAttackTargetState;
         }
         if (actor.currentState == ActorState.Farming)
         {

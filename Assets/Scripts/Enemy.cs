@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using DG.Tweening;
+using UnityEngine.EventSystems;
+using TMPro;
 public class Enemy : Actor
 {
     private bool isTrigered;
@@ -17,12 +18,19 @@ public class Enemy : Actor
     public Enemy[] enemyAllys;
     private Vector3 StartPoint;
     public float followMaxRange = 10;
- 
+    public Transform BarCanvas;
+    public RectTransform HealthBar;
+    public Transform ArmorBar;
+    public TMP_Text healtText;
+    public TMP_Text armorText;
     private bool isDead;
     private void Start()
     {
         animController = GetComponent<AnimationsController>();
         StartPoint = transform.position;
+        healtText.text = currentHealth.ToString();
+        armorText.text =  armor.ToString();
+        ArmorBarActive();
     }
     public void AttackModeOn()
     {
@@ -30,7 +38,7 @@ public class Enemy : Actor
         if (targets.Count > 0)
         {
             int rand = Random.Range(0, targets.Count);
-
+            BarCanvas.GetComponent<CanvasGroup>().DOFade(1, 1);
             target = targets[rand].transform;
             FollowTarget();
         }
@@ -39,6 +47,7 @@ public class Enemy : Actor
             target = null;
             targets.RemoveRange(0, targets.Count);
             agent.SetDestination(StartPoint);
+            BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
         }
 
     }
@@ -66,6 +75,7 @@ public class Enemy : Actor
             agent.SetDestination(StartPoint);
             target = null;
             targets.RemoveRange(0, targets.Count);
+            BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
 
         }
         else
@@ -78,7 +88,7 @@ public class Enemy : Actor
         Vector3 dir = (target.transform.position - transform.position).normalized;
         Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * lookRotationSpeed);
-
+        BarCanvas.LookAt(Camera.main.transform);
 
         agent.SetDestination(transform.position); //durdur
 
@@ -150,12 +160,44 @@ public class Enemy : Actor
             }
         }
     }
+    public void ArmorBarActive()
+    {
+        if (armor > 0)
+        {
+            ArmorBar.gameObject.SetActive(true);
+            for (int i = 0; i < ArmorBar.childCount; i++)
+            {
+                if (i <= armor)
+                    ArmorBar.GetChild(i).gameObject.SetActive(true);
+                else
+                    ArmorBar.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            ArmorBar.gameObject.SetActive(false);
+        }
+
+    }
 
     public override void TakeDamage(int amount)
     {
-       
-        currentHealth -= amount;
+
+        if (amount > armor)
+        {
+            currentHealth -= amount-armor;
+            healtText.text = currentHealth.ToString();
+            HealthBar.DOScaleX((float)currentHealth / (float)maxHealth, .5f);
+
+        }
+        else
+        {
+            currentHealth -= 0;
+        }
+      
         isTrigered = true;
+    
+          
         if (!target)
         {
             AttackModeOn();
@@ -175,7 +217,12 @@ public class Enemy : Actor
       
         
         if (currentHealth <= 0)
-        { Death(); }
+        {
+            currentHealth = 0;
+            healtText.text = currentHealth.ToString();
+            HealthBar.DOScaleX(0, .5f);
+            Death();
+        }
     }
   public override void Death()
     {
@@ -204,12 +251,26 @@ public class Enemy : Actor
         { animController.SetMovingState(true); }
 
     }
+    private void OnMouseEnter()
+    {
+        BarCanvas.GetComponent<CanvasGroup>().DOFade(1, 1);
+    }
+    private void OnMouseOver()
+    {
+        BarCanvas.LookAt(Camera.main.transform);
+    }
+    private void OnMouseExit()
+    {
+        if(target==null)
+        BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
+    }
 
     private void Update()
     {
        
         FollowTarget();
         SetAnimations();
+    
     }
 
 }

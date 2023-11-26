@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float FarmDistance = 3;
     float lookRotationSpeed = 8f;
 
-  
+
 
    
   
@@ -61,8 +62,17 @@ public class PlayerController : MonoBehaviour
             target = hit.transform.GetComponent<Interactable>();
             if (clickEffect != null)
             { Instantiate(clickEffectTarget, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
-            
+            if (target.interactionType == InteractableType.Enemy)
+            {
+             GetComponent<Ally>(). Bar.DOFade(1, 1);
+                GetComponent<Ally>().ArmorBarActive();
+            }
+
+           
         }
+     
+       
+        
     }
 
     void ClickToMove()
@@ -76,14 +86,21 @@ public class PlayerController : MonoBehaviour
             agent.destination = hit.point;
             if(clickEffect != null)
             { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
-         
+            GetComponent<Ally>().Bar.DOFade(0, 1);
         }
     }
     void FollowTarget()
     {
-        if (target == null) return;
+        if (target == null) {
+      
+            return;
+        }
+
+
         if (target.interactionType == InteractableType.Enemy)
         {
+            GetComponent<Ally>().Bar.DOFade(1, 1);
+            GetComponent<Ally>().ArmorBarActive();
             dis =GetComponent<Ally>().weapon.attackDistance;
         }
         else if (target.interactionType == InteractableType.AsignedOnject)
@@ -110,6 +127,7 @@ public class PlayerController : MonoBehaviour
             case InteractableType.Enemy:
                 if (target.GetComponent<Enemy>())
                 {
+
                     switch (GetComponent<Ally>().weapon.weponType) //sliah tipine gore anim oynar
                     {
                         case Weapon.WeaponType.None:
@@ -186,10 +204,17 @@ public class PlayerController : MonoBehaviour
     }
     void SendEggAttack()
     {
-        if (target == null) return;
-
+        if (target == null)
+        {
+            GetComponent<Ally>().Bar.DOFade(0, 1);
+            return;
+        }
         if (target.GetComponent<EggController>().currentHealt <= 0)
-        { target = null; return; }
+        {
+            GetComponent<Ally>().Bar.DOFade(0, 1);
+            target = null;
+            return; 
+        }
 
 
         Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -197,10 +222,19 @@ public class PlayerController : MonoBehaviour
     }
     void SendAttack()
     {
-        if (target == null) return;
+        if (target == null)
+        {
+            GetComponent<Ally>().Bar.DOFade(0, 1);
+            return;
+        }
+      
 
         if (target.myEnemy.currentHealth <= 0)
-        { target = null; return; }
+        {
+            GetComponent<Ally>().Bar.DOFade(0, 1);
+            target = null; 
+            return; 
+        }
 
         
         Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
@@ -237,6 +271,7 @@ public class PlayerController : MonoBehaviour
             Vector3 dir = (target.transform.position- transform.position).normalized;
             Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * lookRotationSpeed);
+            GetComponent<Ally>().Bar.transform.LookAt(Camera.main.transform);
             
         }
         if (agent.destination == transform.position) return;
@@ -251,9 +286,9 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (facing - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
-        
- 
-	}
+           GetComponent<Ally>().Bar.transform.LookAt(Camera.main.transform);
+
+    }
 
     void SetAnimations()
     {

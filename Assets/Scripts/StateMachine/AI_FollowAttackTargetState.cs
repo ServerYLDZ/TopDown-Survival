@@ -28,11 +28,11 @@ public class AI_FollowAttackTargetState : AI_State
                 Vector3 dir = (actor.target.transform.position - actor.transform.position).normalized;
                 Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
                 actor.transform.rotation = Quaternion.Slerp(actor.transform.rotation, lookRot, Time.deltaTime * actor.lookRotationSpeed);
+                actor.Bar.transform.LookAt(Camera.main.transform);
 
 
 
-
-                actor.agent.SetDestination(actor.target.transform.position);
+            actor.agent.SetDestination(actor.target.transform.position);
             
         }
         else

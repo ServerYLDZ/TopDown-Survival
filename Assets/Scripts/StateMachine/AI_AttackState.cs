@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using DG.Tweening;
 public class AI_AttackState : AI_State
 {
     public AI_State followState;
@@ -26,7 +26,8 @@ public class AI_AttackState : AI_State
                 actor.actorBusy = false;
                 actor.currentState = ActorState.Follow;
                 actor.target = null;
-                return followState;
+                    actor.Bar.DOFade(0, 1);
+                    return followState;
             }
             else
             {
@@ -47,6 +48,7 @@ public class AI_AttackState : AI_State
             actor.actorBusy = false;
             actor.target = null;
             actor.currentState = ActorState.Follow;
+            actor.Bar.DOFade(0, 1);
             return followState;
         }
         if (thisActor.target)
@@ -54,6 +56,7 @@ public class AI_AttackState : AI_State
             Vector3 dir = (thisActor.target.transform.position - thisActor.transform.position).normalized;
             Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
             thisActor.transform.rotation = Quaternion.Slerp(thisActor.transform.rotation, lookRot, Time.deltaTime * thisActor.lookRotationSpeed);
+            actor.Bar.transform.LookAt(Camera.main.transform);
             thisActor.agent.SetDestination(actor.transform.position); //durdur
 
 
@@ -103,6 +106,7 @@ public class AI_AttackState : AI_State
             thisActor.actorBusy = false;
             thisActor.target = null;
             thisActor.currentState = ActorState.Follow;
+            thisActor.Bar.DOFade(0, 1);
             return followState;
         }
         if(thisActor.target.GetComponent<Enemy>())
