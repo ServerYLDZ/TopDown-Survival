@@ -7,6 +7,7 @@ public class AI_FollowState : AI_State
 {
     public AI_State followAttackTargetState;
     public AI_State FarmState;
+    public AI_State CuttingState;
     public override AI_State RunState(Ally actor)
     {
         if (GameManager.Instance.playerActor.GetComponent<PlayerController>().target) 
@@ -24,8 +25,12 @@ public class AI_FollowState : AI_State
 
             return FarmState;
         }
+        if (actor.currentState == ActorState.Cuting)
+        {
 
-        
+            return CuttingState;
+        }
+
         actor.FollowPlayer();
         return this;
     }

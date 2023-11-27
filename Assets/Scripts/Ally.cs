@@ -101,6 +101,7 @@ public class Ally : Actor
     }
     public override void Death()
     {
+        Bar.DOFade(0, 1f);
         base.Death();
     }
 

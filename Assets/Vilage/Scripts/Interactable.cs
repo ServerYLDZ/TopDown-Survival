@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum InteractableType { Enemy, Item,Ally,AsignedOnject }
-public enum AsignedObjectType {None, Farm, }
+public enum AsignedObjectType {None, Farm,Wood}
 public class Interactable : MonoBehaviour
 {
 
@@ -24,40 +24,43 @@ public class Interactable : MonoBehaviour
 
     public void InteractWithItem()
     {
-     if (GetComponent<ItemBase>().item.type == ItemTpe.Weapon)
-        {
-            
-            if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))     
+       
+            if (GetComponent<ItemBase>().item.type == ItemTpe.Weapon)
             {
-         
-                Destroy(gameObject);
-            }
-               
-        }
-        if (GetComponent<ItemBase>().item.type == ItemTpe.Armor)
-        {
 
-            if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
-            {
-                Debug.Log("hi");
-                Destroy(gameObject);
-            }
+                if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+                {
 
-        }
-        if (GetComponent<ItemBase>().item.type == ItemTpe.Food)
-        {
-            if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
-            {
-                Destroy(gameObject);
+                    Destroy(gameObject);
+                }
+
             }
-        }
-        if (GetComponent<ItemBase>().item.type == ItemTpe.Wood)
-        {
-            if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+            if (GetComponent<ItemBase>().item.type == ItemTpe.Armor)
             {
-                Destroy(gameObject);
+
+                if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+                {
+                    Debug.Log("hi");
+                    Destroy(gameObject);
+                }
+
             }
-        }
+            if (GetComponent<ItemBase>().item.type == ItemTpe.Food)
+            {
+                if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+                {
+                    Destroy(gameObject);
+                }
+            }
+            if (GetComponent<ItemBase>().item.type == ItemTpe.Wood)
+            {
+                if (GameManager.Instance.Inventer.AddInventory(GetComponent<ItemBase>().item))
+                {
+                    Destroy(gameObject);
+                }
+            }
+        
+     
 
     }
     public void InteractWithAlly()

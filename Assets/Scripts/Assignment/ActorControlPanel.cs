@@ -46,6 +46,16 @@ public class ActorControlPanel : MonoSingleton<ActorControlPanel> ,IDropHandler
                     itm.oldParent.GetComponent<FarmAssignPanel>().informaionText.text = "Please drop ally here for assign...";
                 }
             }
+            if (itm.ally.currentState == ActorState.Cuting) // diger atamalarda burasina yeni eklemeler yapilcak if wooding gibi
+            {
+                GameManager.Instance.woodTree.currentWorkerCount--;
+                //text deisimleri icin alt kisim var
+                itm.oldParent.GetComponent<WoodAsigmentPanel>().limitsText.text = GameManager.Instance.woodTree.currentWorkerCount + " / " + GameManager.Instance.woodTree.MaxFarmWorker;
+                if (itm.oldParent.childCount <= 0)
+                {
+                    itm.oldParent.GetComponent<WoodAsigmentPanel>().informaionText.text = "Please drop ally here for assign...";
+                }
+            }
 
             itm.ally.currentState = ActorState.Follow;
             AddActorControlPrefab(itm.ally);         

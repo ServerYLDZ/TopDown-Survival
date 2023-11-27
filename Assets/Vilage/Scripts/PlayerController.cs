@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     void InteractWith()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, InteractableLayers) &&!playerBusy)
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, InteractableLayers) &&!playerBusy&& !GameManager.Instance.InventoryTAB.activeInHierarchy)
         {
             hit.transform.CompareTag("Interactable");
             target = hit.transform.GetComponent<Interactable>();
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers) ) 
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers) && !GameManager.Instance.InventoryTAB.activeInHierarchy) 
         {
             target = null;
             playerBusy = false;
@@ -192,6 +192,9 @@ public class PlayerController : MonoBehaviour
                     case AsignedObjectType.Farm:
                         GameManager.Instance.OpenFarmAssignPanel();
                         
+                        break;
+                    case AsignedObjectType.Wood:
+                        GameManager.Instance.OpenWoodAssignPanel();
                         break;
                     default:
                         break;

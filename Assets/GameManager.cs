@@ -16,6 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject InventoryTAB;
     public GameObject ActorControlPanelTAB;
     public GameObject FarmAssignPanelTAB;
+    public GameObject WoodAssignPanelTAB;
     private bool isOpenAnnyPanelNow = false;
     private bool inventortyOpen = false;
     private bool actorControlPanelOpen = false;
@@ -23,6 +24,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform []actorFolowPlayerPos;
     public bool[] isActorFolowPlayerPosUseForNow;
     public Farm farm;
+    public Wood woodTree;
     public bool isGameOver = false;
     public void OpenInventor()
     {
@@ -89,6 +91,26 @@ public class GameManager : MonoSingleton<GameManager>
         actorControlPanelOpen = false;
         isOpenAnnyPanelNow = false;
     }
+
+
+    public void OpenWoodAssignPanel()
+    {
+        if (!isOpenAnnyPanelNow)
+        {
+            ActorControlPanelTAB.SetActive(true);
+            WoodAssignPanelTAB.SetActive(true);
+            actorControlPanelOpen = true;
+            isOpenAnnyPanelNow = true;
+        }
+
+    }
+    public void CloseWoodAssignPanel()
+    {
+        ActorControlPanelTAB.SetActive(false);
+        WoodAssignPanelTAB.SetActive(false);
+        actorControlPanelOpen = false;
+        isOpenAnnyPanelNow = false;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab) )
@@ -107,11 +129,13 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 OpenActorControlPanel();
                 OpenFarmAssignPanel();
+                OpenWoodAssignPanel();
             }
             else
             {
                 CloseActorControlPanel();
                 CloseFarmAssignPanel();
+                CloseWoodAssignPanel();
                
             }
         }

@@ -233,6 +233,7 @@ public class Enemy : Actor
                 GameManager.Instance.playerActor.GetComponent<PlayerController>().target = enemy.transform.GetComponent<Interactable>();
             }
         }
+        BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
         isDead = true;
         agent.SetDestination(transform.position);
         this.enabled=false;

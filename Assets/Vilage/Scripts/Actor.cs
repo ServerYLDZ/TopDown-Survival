@@ -16,7 +16,7 @@ public enum ActorState
     None,
     Follow,
     Farming,
-    Chopping,
+    Cuting,
     Attack,
 
 }

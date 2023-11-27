@@ -1216,7 +1216,7 @@ MonoBehaviour:
   attackDis: 2
   attackDelay: 0.3
   attackSpeed: 3
-  attackDamage: 4
+  attackDamage: 7
   hitEffect: {fileID: 3810448783153749638, guid: 010974213f6431f4eab9f109d60bd42f, type: 3}
   enemyAllys: []
   followMaxRange: 20
