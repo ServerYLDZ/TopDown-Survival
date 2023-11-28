@@ -7,8 +7,9 @@ public class Ally : Actor
 {
     const string IDLE = "Idle";
     const string WALK = "Walk";
-
-
+    const string DEAD = "Die";
+    public int Level = 1;
+    public float xp = 0;
     public ActorControlItem actorControlItem;
     public ActorInfoPanel InfoPanel;
     public Transform weponTransform;
@@ -47,7 +48,7 @@ public class Ally : Actor
             ArmorBar.gameObject.SetActive(true);
             for (int i = 0; i < ArmorBar.childCount; i++)
             {
-                if (i <= armor)
+                if (i <armor)
                     ArmorBar.GetChild(i).gameObject.SetActive(true);
                 else
                     ArmorBar.GetChild(i).gameObject.SetActive(false);
@@ -58,6 +59,29 @@ public class Ally : Actor
             ArmorBar.gameObject.SetActive(false);
         }
       
+    }
+    public void TakeXP(float amout)
+    {
+        if (GameManager.Instance.xpLevelUpLimits[Level-1]<=xp+amout) //level UP mu
+        {
+            xp =   xp + amout- GameManager.Instance.xpLevelUpLimits[Level-1];
+            Level++;
+            maxHealth++;
+            currentHealth++;
+            if (Level % 5 == 0)
+            {
+                armor++;
+            }
+          if(GameManager.Instance.xpLevelUpLimits[Level - 1] <= xp)
+            {
+                TakeXP(0);
+            }
+        }
+        else
+        {
+            xp += amout;
+        }
+       
     }
    
     public override void TakeDamage(int amount)
@@ -73,8 +97,11 @@ public class Ally : Actor
                 {
                     HealthBar.DOScaleX(1, .5f);
                     currentHealth = maxHealth;
+                    GetFloatingText("-" + (maxHealth-amount));
+                    text.GetComponent<TextMesh>().color = Color.green;
                 }
-              
+                GetFloatingText("-" + (amount));
+                text.GetComponent<TextMesh>().color = Color.green;
             }
             else
             {
@@ -82,11 +109,14 @@ public class Ally : Actor
                 {
                     currentHealth -= amount - armor;
                     HealthBar.DOScaleX((float)currentHealth / (float)maxHealth, .5f);
-               
+                    GetFloatingText("-" + (amount - armor));
+                    text.GetComponent<TextMesh>().color = Color.red;
                 }
                 else
                 {
                     currentHealth -= 0;
+                    GetFloatingText("-" + (0));
+                    text.GetComponent<TextMesh>().color = Color.yellow;
                 }
             }
         }
@@ -102,7 +132,32 @@ public class Ally : Actor
     public override void Death()
     {
         Bar.DOFade(0, 1f);
-        base.Death();
+        if (myClass == ActorClass.Leader)
+        {
+            agent.enabled = false;
+            target = null;
+            animator.Play(DEAD);
+            GameManager.Instance.isGameOver = true;         
+            GetComponent<Collider>().enabled = false;
+            GetComponent<PlayerController>().playerBusy = true;
+            GetComponent<PlayerController>().target = null;
+            GetComponent<PlayerController>().enabled = false;
+        
+            transform.GetChild(0).localPosition = new Vector3(0, -.7f, 0);
+      
+        }
+        else
+        {          
+            actorBusy = true;
+            target = null;
+            animator.Play(DEAD);
+            GetComponent<Collider>().enabled = false;
+            GetComponent<ActorStateMacineController>().enabled = false;
+            enabled = false;
+            agent.enabled = false;
+            transform.GetChild(0).localPosition = new Vector3(0, -.7f, 0);
+      
+        }
     }
 
     public override void FollowPlayer()
@@ -164,6 +219,10 @@ public class Ally : Actor
             Hunger--;
         }
 
+    }
+    public override void GetFloatingText(string damage)
+    {
+        base.GetFloatingText(damage);
     }
     public IEnumerator SetAnimationSlowly()
     {

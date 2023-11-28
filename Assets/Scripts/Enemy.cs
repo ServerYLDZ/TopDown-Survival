@@ -13,6 +13,7 @@ public class Enemy : Actor
     public float attackDelay=.3f;
     public float attackSpeed=2;
     public int attackDamage=1;
+    public float amoutXP=10;
     public ParticleSystem hitEffect;
     private AnimationsController animController;
     public Enemy[] enemyAllys;
@@ -23,6 +24,7 @@ public class Enemy : Actor
     public Transform ArmorBar;
     public TMP_Text healtText;
     public TMP_Text armorText;
+
     private bool isDead;
     private void Start()
     {
@@ -188,11 +190,13 @@ public class Enemy : Actor
             currentHealth -= amount-armor;
             healtText.text = currentHealth.ToString();
             HealthBar.DOScaleX((float)currentHealth / (float)maxHealth, .5f);
-
+            GetFloatingText("-" + (amount - armor));
         }
         else
         {
             currentHealth -= 0;
+            GetFloatingText("-" + (0));
+            text.GetComponent<TextMesh>().color = Color.yellow;
         }
       
         isTrigered = true;
@@ -230,7 +234,12 @@ public class Enemy : Actor
         {
             if (enemy)
             {
-                GameManager.Instance.playerActor.GetComponent<PlayerController>().target = enemy.transform.GetComponent<Interactable>();
+                if (enemy.currentHealth > 0)
+                {
+                    GameManager.Instance.playerActor.GetComponent<PlayerController>().target = enemy.transform.GetComponent<Interactable>();
+                    break;
+                }
+               
             }
         }
         BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
@@ -265,7 +274,10 @@ public class Enemy : Actor
         if(target==null)
         BarCanvas.GetComponent<CanvasGroup>().DOFade(0, 1);
     }
-
+    public override void GetFloatingText(string damage)
+    {
+        base.GetFloatingText(damage);
+    }
     private void Update()
     {
        

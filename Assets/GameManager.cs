@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
     public float Watter;
     public Ally playerActor;
     public Ally CurrentActor;
+    public CinemachineVirtualCamera VirtualCam;
     public ActorControlPanel ActorControler;
     public Envanter Inventer;
     public Weapon HandWepon;
@@ -23,6 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Ally[] allActors;
     public Transform []actorFolowPlayerPos;
     public bool[] isActorFolowPlayerPosUseForNow;
+    public float[] xpLevelUpLimits;
     public Farm farm;
     public Wood woodTree;
     public bool isGameOver = false;

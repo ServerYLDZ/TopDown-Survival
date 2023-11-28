@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 0
-  image: {fileID: 21300000, guid: ed64f3a17f2ede646be21ed6edc9161a, type: 3}
+  image: {fileID: 21300000, guid: 49440cba7d094ad42ba19be3e4f0428c, type: 3}
   description: 'This item can Make more Faster '
   Name: Leopars Feet

@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
-  description: This Item Portect Your Head
+  image: {fileID: 21300000, guid: 3a33633e1ba06874694a36a52f144896, type: 3}
+  description: '"'
   Name: Thif's Helmet

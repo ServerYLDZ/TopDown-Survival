@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 1
   usable: 0
   count: 1
-  image: {fileID: 21300000, guid: d98fbe17966d8ef449b25b99024bf36f, type: 3}
+  image: {fileID: 21300000, guid: 05c4bbe8b1dd0b94ca56f28d8325e695, type: 3}
   description: U can use this wood for build samething
   Name: Wood

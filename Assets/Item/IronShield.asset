@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 3168140d6f409d0448447f18568d9482, type: 3}
+  image: {fileID: 21300000, guid: 6dfd2c4dec145b049846f26bd2201f46, type: 3}
   description: This Item can Portect U and your all Ally
   Name: Iron Shield

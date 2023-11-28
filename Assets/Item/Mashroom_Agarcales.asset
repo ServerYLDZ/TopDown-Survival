@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 1
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 36b376cee8459d34e8aefb062d29bcf2, type: 3}
+  image: {fileID: 21300000, guid: a7ef6214940772c4b9fc6cf89051472b, type: 3}
   description: Healty and nutrition
   Name: Mashroom Agarcales

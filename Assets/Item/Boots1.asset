@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 0
-  image: {fileID: 21300000, guid: 7d0e1d7f7b2d33a4e9ac7321181fe22d, type: 3}
+  image: {fileID: 21300000, guid: 33ecf9ec13a42524cbaed293f19d67c2, type: 3}
   description: This item can Make more Faster
   Name: Thif's Feet

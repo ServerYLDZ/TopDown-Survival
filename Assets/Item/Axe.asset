@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 3086d66a563317b40a20a20da2c64ac0, type: 3}
+  image: {fileID: 21300000, guid: dd0d69e664275f54eb9aaac1eece3b17, type: 3}
   description: 'U can use For Cutting Tree '
   Name: Axe

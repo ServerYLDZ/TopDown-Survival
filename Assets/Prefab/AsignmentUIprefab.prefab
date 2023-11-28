@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SERVER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7bffec6f527a38241a587d33b7b5c307, type: 2}
+  m_sharedMaterial: {fileID: 7060033270169603541, guid: 7bffec6f527a38241a587d33b7b5c307, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -232,6 +232,7 @@ MonoBehaviour:
   Name: {fileID: 4855303422074439302}
   jobText: {fileID: 1319712093118183391}
   parentAfterDrag: {fileID: 0}
+  oldParent: {fileID: 0}
   cncsGroup: {fileID: 8101074441100310132}
 --- !u!225 &8101074441100310132
 CanvasGroup:
@@ -313,8 +314,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7bffec6f527a38241a587d33b7b5c307, type: 2}
+  m_sharedMaterial: {fileID: 7060033270169603541, guid: 7bffec6f527a38241a587d33b7b5c307, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

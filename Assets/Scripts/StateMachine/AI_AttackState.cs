@@ -122,6 +122,9 @@ public class AI_AttackState : AI_State
             
             Instantiate(thisActor.hitEffect, thisActor.target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             thisActor.target.GetComponent<Enemy>().TakeDamage(thisActor.weapon.attackDamage);
+            if (thisActor.target.GetComponent<Enemy>().currentHealth <= 0) { //hasardan Sonra oldurmussem xp Kazanirim;
+                thisActor.TakeXP(thisActor.target.GetComponent<Enemy>().amoutXP);
+            }
         }
       
 
@@ -131,8 +134,11 @@ public class AI_AttackState : AI_State
 
     void ResetBusyState()
     {
-      
-        transform.parent.GetComponent<Actor>().actorBusy = false;
-        thisActor.SetAnimations();
+        if (transform.parent.GetComponent<Actor>().currentHealth > 0)
+        {
+            transform.parent.GetComponent<Actor>().actorBusy = false;
+            thisActor.SetAnimations();
+        }
+    
     }
 }

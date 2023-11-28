@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
+  image: {fileID: 21300000, guid: 524be1d22e72b084b984b429febbf26b, type: 3}
   description: This Item Portect Your Head
   Name: Iron Helmet

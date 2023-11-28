@@ -196,13 +196,11 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
                else if (item.type == ItemTpe.Wood)
                {
                    item.prefab.UseItem(GameManager.Instance.CurrentActor);
-                   amount--;
+                
                    amountTexxt.text = amount.ToString();
-                   transform.parent.GetComponent<ItemSlot>().dragableitem = null;
-                   if (amount <= 0)
-                       Destroy(this.gameObject);
-
-                   GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
+               
+                 
+                
                }
                //diger nesnelerle etkilesim burdan kontrol edilcek
            }
@@ -444,7 +442,7 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
             }
         
         }
-        else if (item.type == ItemTpe.Food)
+        else if (item.type == ItemTpe.Wood)
         {
             popUpData.BuffsT.text = "U have:" + amount;
         }

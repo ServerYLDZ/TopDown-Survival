@@ -6,7 +6,7 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera VirtualCam;
+
     CinemachineComponentBase componentBase;
     float camDis;
     public float sensivity = 10f;
@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     {
         if (componentBase==null)
         {
-            componentBase = VirtualCam.GetCinemachineComponent(CinemachineCore.Stage.Body);
+            componentBase = GameManager.Instance.VirtualCam.GetCinemachineComponent(CinemachineCore.Stage.Body);
         }
         if (Input.GetAxis("Mouse ScrollWheel")!=0)
         {
@@ -26,18 +26,6 @@ public class CameraController : MonoBehaviour
             }
         }
     }
-    /*  public Transform target;
-
-      public float smoothSpeed = 8f;
-      public Vector3 offset;
-
-      void Update()
-      {
-          if(target == null) return;
-
-          Vector3 desiredPosition = new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z);
-          Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
-          transform.position = smoothedPosition;
-      }*/
+  
 
 }

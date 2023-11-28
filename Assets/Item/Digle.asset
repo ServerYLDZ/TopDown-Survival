@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: cdb88fdb0cf46b244a667edaff21c7df, type: 3}
+  image: {fileID: 21300000, guid: cd56dbc4f4bba8740be8895fda1b8fb0, type: 3}
   description: Long Distance High Damage
   Name: Digle

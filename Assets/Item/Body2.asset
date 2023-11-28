@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 0
-  image: {fileID: 21300000, guid: 42d45b97073618b42bfcfc22740c4bc7, type: 3}
+  image: {fileID: 21300000, guid: 15f306496ab25f3409589b05e4dd0bd9, type: 3}
   description: God Blass U ...
   Name: God's Chest

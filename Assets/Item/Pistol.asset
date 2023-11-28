@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: c8a69ecdf54ac8e4b873466605de27ff, type: 3}
+  image: {fileID: 21300000, guid: 69093a625065ef244bf289be1ae2ae1b, type: 3}
   description: Long Distance Midum Damage
   Name: Pistol

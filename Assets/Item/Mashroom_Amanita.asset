@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 1
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 120bf54dff785a0429b068b814e9c12a, type: 3}
+  image: {fileID: 21300000, guid: 267262da8ceb9da4486f1b39df472a7a, type: 3}
   description: Healty and nutrition
   Name: Mashroom Amanita

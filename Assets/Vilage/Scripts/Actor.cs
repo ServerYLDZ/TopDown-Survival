@@ -24,7 +24,6 @@ public class Actor : MonoBehaviour
 {
    
     public int maxHealth;
-   
     public ActorClass myClass;
     public int armor; 
     public int currentHealth;
@@ -38,7 +37,7 @@ public class Actor : MonoBehaviour
     public bool actorBusy = false;
     public Transform target;
     public float lookRotationSpeed = 8f;
-
+    protected GameObject text;
     void Awake()
     { 
         currentHealth = maxHealth;
@@ -106,6 +105,13 @@ public class Actor : MonoBehaviour
            
         }
     }
- 
+    public virtual void GetFloatingText(string damage)
+    {
+        text = ObjectPool.Instance.GetPooledObject(1);
+        text.transform.SetParent(this.transform);
+        text.transform.position = transform.position;
+        if (text.GetComponent<TextMesh>())
+            text.GetComponent<TextMesh>().text = damage;
+    }
 
 }

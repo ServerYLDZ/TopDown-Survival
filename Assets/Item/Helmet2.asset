@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: a04ecc9d5e12d5d449077414eb86635e, type: 3}
+  image: {fileID: 21300000, guid: 37c4a0218c09cd242abe511b0b876c59, type: 3}
   description: This Item Portect Your Head
   Name: Farmer Hat

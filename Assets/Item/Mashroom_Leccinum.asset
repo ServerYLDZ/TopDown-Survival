@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 1
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: 3ebdd5b3c161fc343a4bbc3ea42da8ca, type: 3}
+  image: {fileID: 21300000, guid: f5fda04a60acfe84a8d9b339b698ba38, type: 3}
   description: Not Healty just nutrition
   Name: Mashroom Leccinum

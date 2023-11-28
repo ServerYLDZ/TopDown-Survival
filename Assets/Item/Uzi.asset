@@ -17,6 +17,6 @@ MonoBehaviour:
   stackable: 0
   usable: 1
   count: 1
-  image: {fileID: 21300000, guid: c9ed6d6ea2f9657409bfa068d4846139, type: 3}
+  image: {fileID: 21300000, guid: fb256c4c59055e74a9468c6644696453, type: 3}
   description: Fast attack and long distance
   Name: Uzi
