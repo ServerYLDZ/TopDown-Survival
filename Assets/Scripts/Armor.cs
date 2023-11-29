@@ -62,7 +62,7 @@ public class Armor : ItemBase
             default:
                 break;
         }
-
+        HUD.Instance.ArmorBarSet();
     }
 
     public void UnUseArmor(Ally act)
@@ -86,6 +86,6 @@ public class Armor : ItemBase
             Destroy(act.HeadTransform.GetChild(0).gameObject);
         }
 
-
+        HUD.Instance.ArmorBarSet();
     }
 }

@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
         
         Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        if (target.GetComponent<Enemy>().currentHealth- GetComponent<Ally>().weapon.attackDamage-GetComponent<Ally>().armor <= 0) //hasardan once hasarim oldurmeye yetiyorsaxp ver
+        if (target.GetComponent<Enemy>().currentHealth- (GetComponent<Ally>().weapon.attackDamage- target.GetComponent<Enemy>().armor) <= 0) //hasardan once hasarim oldurmeye yetiyorsaxp ver
         { //hasardan Sonra oldurmussem xp Kazanirim;
             GetComponent<Ally>().TakeXP(target.GetComponent<Enemy>().amoutXP);
             Debug.Log(target.GetComponent<Enemy>().amoutXP);

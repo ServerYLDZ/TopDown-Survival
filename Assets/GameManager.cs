@@ -9,6 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
     public float Food;
     public float Wood;
     public float Watter;
+    public int peapleCount=1;
     public Ally playerActor;
     public Ally CurrentActor;
     public CinemachineVirtualCamera VirtualCam;

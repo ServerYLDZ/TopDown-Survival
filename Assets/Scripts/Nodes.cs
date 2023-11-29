@@ -55,6 +55,7 @@ public class Nodes : MonoBehaviour
             act.actorBusy = false;
             GameManager.Instance.Food += GameManager.Instance.farm.collectAmount*act.FarmSpeed;
             GameManager.Instance.farm.nodes = nextNode;
+            HUD.Instance.ResourcesSet();
         }
         else if (act.currentState == ActorState.Cuting)
         {
@@ -66,6 +67,7 @@ public class Nodes : MonoBehaviour
             act.actorBusy = false;
             GameManager.Instance.Wood += GameManager.Instance.woodTree.collectAmount * act.WoodSpeed;
             GameManager.Instance.woodTree.nodes = nextNode;
+            HUD.Instance.ResourcesSet();
         }
 
 

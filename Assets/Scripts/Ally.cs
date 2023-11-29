@@ -67,11 +67,14 @@ public class Ally : Actor
             xp =   xp + amout- GameManager.Instance.xpLevelUpLimits[Level-1];
             Level++;
             maxHealth++;
-            currentHealth++;
+            currentHealth++;        
             if (Level % 5 == 0)
             {
                 armor++;
             }
+            HUD.Instance.LevelSet();
+            HUD.Instance.ArmorBarSet();
+
           if(GameManager.Instance.xpLevelUpLimits[Level - 1] <= xp)
             {
                 TakeXP(0);
@@ -119,6 +122,7 @@ public class Ally : Actor
                     text.GetComponent<TextMesh>().color = Color.yellow;
                 }
             }
+            HUD.Instance.HealtSet();
         }
       
 

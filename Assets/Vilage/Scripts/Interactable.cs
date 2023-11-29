@@ -70,7 +70,8 @@ public class Interactable : MonoBehaviour
             
             myAlly.currentState = ActorState.Follow;
             myAlly.actorControlItem = GameManager.Instance.ActorControler.AddActorControlPrefab(myAlly);
-        
+            GameManager.Instance.peapleCount++;
+            HUD.Instance.ResourcesSet();
            // ActorControlPanel.Instance.AddActorControlPrefab(myAlly);
          
             //effect girer 
