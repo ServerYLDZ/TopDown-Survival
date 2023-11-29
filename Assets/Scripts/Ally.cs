@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using TMPro;
 public class Ally : Actor
 {
     const string IDLE = "Idle";
@@ -34,12 +34,15 @@ public class Ally : Actor
     public CanvasGroup Bar;
     public RectTransform HealthBar;
     public Transform ArmorBar;
+    public TMP_Text levelText;
+    public ParticleSystem levelUpEffect;
 
 
     void Start()
     {
         StartCoroutine(SetAnimationSlowly());
         InvokeRepeating(nameof(DecreseHunger), 0, 100);
+        levelText.text = Level.ToString();
     }
     public void ArmorBarActive()
     {
@@ -67,7 +70,9 @@ public class Ally : Actor
             xp =   xp + amout- GameManager.Instance.xpLevelUpLimits[Level-1];
             Level++;
             maxHealth++;
-            currentHealth++;        
+            currentHealth++;
+            levelText.text = Level.ToString();
+             Instantiate(levelUpEffect, transform.position+ new Vector3(0, 0.1f, 0), levelUpEffect.transform.rotation,transform);
             if (Level % 5 == 0)
             {
                 armor++;
@@ -135,6 +140,7 @@ public class Ally : Actor
     }
     public override void Death()
     {
+        currentHealth = 0;
         Bar.DOFade(0, 1f);
         if (myClass == ActorClass.Leader)
         {

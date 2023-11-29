@@ -63,6 +63,7 @@ public class Armor : ItemBase
                 break;
         }
         HUD.Instance.ArmorBarSet();
+        HUD.Instance.HealtSet();
     }
 
     public void UnUseArmor(Ally act)
@@ -87,5 +88,6 @@ public class Armor : ItemBase
         }
 
         HUD.Instance.ArmorBarSet();
+        HUD.Instance.HealtSet();
     }
 }

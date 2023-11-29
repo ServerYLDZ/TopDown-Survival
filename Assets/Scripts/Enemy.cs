@@ -24,7 +24,8 @@ public class Enemy : Actor
     public Transform ArmorBar;
     public TMP_Text healtText;
     public TMP_Text armorText;
-
+    public TMP_Text levelText;
+    public int Level = 1;
     private bool isDead;
     private void Start()
     {
@@ -33,6 +34,7 @@ public class Enemy : Actor
         healtText.text = currentHealth.ToString();
         armorText.text =  armor.ToString();
         ArmorBarActive();
+        levelText.text = Level.ToString();
     }
     public void AttackModeOn()
     {
