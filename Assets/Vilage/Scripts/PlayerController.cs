@@ -61,7 +61,10 @@ public class PlayerController : MonoBehaviour
             hit.transform.CompareTag("Interactable");
             target = hit.transform.GetComponent<Interactable>();
             if (clickEffect != null)
-            { Instantiate(clickEffectTarget, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
+            {
+              ParticleSystem particle=  Instantiate(clickEffectTarget, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+                Destroy(particle.gameObject, .5f);
+            }
             if (target.interactionType == InteractableType.Enemy)
             {
              GetComponent<Ally>(). Bar.DOFade(1, 1);
@@ -85,7 +88,10 @@ public class PlayerController : MonoBehaviour
             playerBusy = false;
             agent.destination = hit.point;
             if(clickEffect != null)
-            { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
+            {
+                ParticleSystem particle = Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+                Destroy(particle.gameObject, .5f);
+            }
             GetComponent<Ally>().Bar.DOFade(0, 1);
         }
     }
