@@ -221,6 +221,16 @@ MonoBehaviour:
   _particleSystem: {fileID: 7832326094824186035}
   enemyAllys: []
   currentHealt: 2
+  prefabItems:
+  - {fileID: 63018543226749766}
+  - {fileID: 5160210275353783281, guid: d630428dfef92b745a7fc3be1a29cfaf, type: 3}
+  - {fileID: 8724377995397805077, guid: 795a1839a090b7345971f68a3681fad3, type: 3}
+  - {fileID: 6660571786797794205, guid: b82a3fb0fd970724e92a4cd484188cb1, type: 3}
+  - {fileID: 3803783253336134379, guid: c1966fb00e9a9754490ae695ac072392, type: 3}
+  - {fileID: 5983553879822803525, guid: c691cbe53fbac594db964efe348070bd, type: 3}
+  - {fileID: 8949465505093272051, guid: 3139941deed02b44cb9e5b49cbda4b5e, type: 3}
+  - {fileID: 2509774599414031668, guid: 26561d2a3589e24488972e1d391465e1, type: 3}
+  itemChance: 50
 --- !u!114 &-6130650018876032702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
+  asignedObjectType: 0
 --- !u!65 &7838507463512345501
 BoxCollider:
   m_ObjectHideFlags: 0

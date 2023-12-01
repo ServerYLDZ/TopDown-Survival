@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.3
+    agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.75
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.1
+    cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -3422,9 +3422,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3f60c017a44364b4fa20728a8162ba1c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8683a069477aed44f987a1cd90861838, type: 2}
 --- !u!4 &201049840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 906041983201916532, guid: 52d019b45dc4c954f9ccdd946e5f65ff, type: 3}
@@ -4779,7 +4779,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 253610acfbba0fc41908322e3dac424b, type: 2}
 --- !u!4 &315872251 stripped
@@ -6291,8 +6291,8 @@ Transform:
   - {fileID: 282141768}
   - {fileID: 436815015}
   - {fileID: 442779032}
-  - {fileID: 478383374}
   - {fileID: 482359672}
+  - {fileID: 478383374}
   - {fileID: 628251376}
   - {fileID: 663570332}
   - {fileID: 728689425}
@@ -6344,7 +6344,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: d2e878f791aa549448cb3e73d34dfec9, type: 2}
 --- !u!4 &367951849 stripped
@@ -8191,7 +8191,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3c6cb468124ca8f4b9dd9fcc7ef880cb, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c6cb468124ca8f4b9dd9fcc7ef880cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8392,7 +8392,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 58ae3d7bb51e9284ea821040ba15a74f, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 58ae3d7bb51e9284ea821040ba15a74f, type: 3}
       propertyPath: m_LocalScale.x
@@ -8568,15 +8568,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4823869304909272599, guid: 19a9fe0ad6947b44e877e2dabc6b0926, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00008984376
+      value: 0.00036
       objectReference: {fileID: 0}
     - target: {fileID: 4823869304909272599, guid: 19a9fe0ad6947b44e877e2dabc6b0926, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0038800046
+      value: 0.00423
       objectReference: {fileID: 0}
     - target: {fileID: 4823869304909272599, guid: 19a9fe0ad6947b44e877e2dabc6b0926, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0019100005
+      value: 0.00191
       objectReference: {fileID: 0}
     - target: {fileID: 4823869304909272599, guid: 19a9fe0ad6947b44e877e2dabc6b0926, type: 3}
       propertyPath: m_LocalRotation.w
@@ -36293,6 +36293,18 @@ PrefabInstance:
     - target: {fileID: 8184135469084985920, guid: d0d136d741ceb0041b7cf79d834caa68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509932632379400206, guid: d0d136d741ceb0041b7cf79d834caa68, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0070245154
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509932632379400206, guid: d0d136d741ceb0041b7cf79d834caa68, type: 3}
+      propertyPath: m_Center.y
+      value: -0.000055530072
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509932632379400206, guid: d0d136d741ceb0041b7cf79d834caa68, type: 3}
+      propertyPath: m_Center.z
+      value: 0.003166674
       objectReference: {fileID: 0}
     - target: {fileID: 8509932632379400206, guid: d0d136d741ceb0041b7cf79d834caa68, type: 3}
       propertyPath: m_IsTrigger

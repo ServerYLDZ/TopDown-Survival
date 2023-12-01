@@ -226,7 +226,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+      ParticleSystem part=  Instantiate(hitEffect, target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        Destroy(part.gameObject, .5f);
+
         target.GetComponent<EggController>().TakeDamage(GetComponent<Ally>().weapon.attackDamage);
     }
     void SendAttack()

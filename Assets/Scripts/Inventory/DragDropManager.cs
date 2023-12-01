@@ -420,7 +420,7 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
                 "+ " + popA.Health.ToString() + " Health " + "\n" +
                 "+ " + popA.armor.ToString() + " Armor " + "\n";
             if (popA.speed > 0)
-                popUpData.BuffsT.text += "+ " + popA.speed.ToString() + " Armor " + "\n";
+                popUpData.BuffsT.text += "+ " + popA.speed.ToString() + " Speed" + "\n";
         }
         else if (item.type == ItemTpe.Food)
         {

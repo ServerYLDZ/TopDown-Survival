@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class EggController :MonoBehaviour
 {
@@ -7,7 +9,8 @@ public class EggController :MonoBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     public Enemy[] enemyAllys;
     public int currentHealt;
-    public GameObject prefabItem;//ilerde oldurdugunde spwnlancak objemiz
+    public List<GameObject> prefabItems;//ilerde oldurdugunde spwnlancak objemiz
+    public int itemChance=50;
     public void Clear()
     {
         _full.gameObject.SetActive(true);
@@ -47,6 +50,16 @@ public class EggController :MonoBehaviour
             }
         }
         DestroyEgg();
+        Invoke("SpwnObject", 1);
         Destroy(gameObject, 3);
+    }
+  public void SpwnObject()
+    {
+        int rand = Random.Range(0,100);
+        if (rand < itemChance)
+        {
+            int randItem = Random.Range(0, prefabItems.Count);
+            Instantiate(prefabItems[randItem], transform.position+new Vector3(Random.Range(1,3),0, Random.Range(1, 3)), transform.rotation);
+        }
     }
 }

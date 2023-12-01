@@ -72,7 +72,8 @@ public class Ally : Actor
             maxHealth++;
             currentHealth++;
             levelText.text = Level.ToString();
-             Instantiate(levelUpEffect, transform.position+ new Vector3(0, 0.1f, 0), levelUpEffect.transform.rotation,transform);
+         ParticleSystem part  =Instantiate(levelUpEffect, transform.position+ new Vector3(0, 0.1f, 0), levelUpEffect.transform.rotation,transform);
+            Destroy(part.gameObject, .5f);
             if (Level % 5 == 0)
             {
                 armor++;

@@ -120,7 +120,8 @@ public class AI_AttackState : AI_State
         if(thisActor.target && thisActor&& thisActor.target.GetComponent<Enemy>())
         {
             
-            Instantiate(thisActor.hitEffect, thisActor.target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+         ParticleSystem part=Instantiate(thisActor.hitEffect, thisActor.target.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            Destroy(part.gameObject, .5f);
             thisActor.target.GetComponent<Enemy>().TakeDamage(thisActor.weapon.attackDamage);
             if (thisActor.target.GetComponent<Enemy>().currentHealth <= 0) { //hasardan Sonra oldurmussem xp Kazanirim;
                 thisActor.TakeXP(thisActor.target.GetComponent<Enemy>().amoutXP);
