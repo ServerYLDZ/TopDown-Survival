@@ -59,7 +59,16 @@ public class EggController :MonoBehaviour
         if (rand < itemChance)
         {
             int randItem = Random.Range(0, prefabItems.Count);
-            Instantiate(prefabItems[randItem], transform.position+new Vector3(Random.Range(1,3),0, Random.Range(1, 3)), transform.rotation);
+          GameObject obj = Instantiate(prefabItems[randItem], transform.position, prefabItems[randItem].transform.rotation);
+            if (obj.GetComponent<Armor>())
+            {
+                if (obj.GetComponent<Armor>().armorType==Armor.ArmorType.Head)
+                {
+                    obj.transform.position -= new Vector3(0, 1.6f, 0);
+                    Debug.Log("hi");
+                    
+                }
+            }
         }
     }
 }

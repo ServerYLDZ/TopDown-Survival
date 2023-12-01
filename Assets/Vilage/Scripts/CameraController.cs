@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    public Camera minimapCam;
 
     CinemachineComponentBase componentBase;
     float camDis;
@@ -22,7 +23,11 @@ public class CameraController : MonoBehaviour
             if (componentBase is CinemachineFramingTransposer)
             {
                 if ((componentBase as CinemachineFramingTransposer).m_CameraDistance-camDis>5 && (componentBase as CinemachineFramingTransposer).m_CameraDistance - camDis < 20)
-                (componentBase as CinemachineFramingTransposer).m_CameraDistance -= camDis;
+                {
+                    (componentBase as CinemachineFramingTransposer).m_CameraDistance -= camDis;
+                    minimapCam.orthographicSize= (componentBase as CinemachineFramingTransposer).m_CameraDistance;
+                }
+             
             }
         }
     }

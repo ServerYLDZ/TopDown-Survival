@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
         if (target.GetComponent<Enemy>().currentHealth- (GetComponent<Ally>().weapon.attackDamage- target.GetComponent<Enemy>().armor) <= 0) //hasardan once hasarim oldurmeye yetiyorsaxp ver
         { //hasardan Sonra oldurmussem xp Kazanirim;
             GetComponent<Ally>().TakeXP(target.GetComponent<Enemy>().amoutXP);
-            Debug.Log(target.GetComponent<Enemy>().amoutXP);
+         
         }
         target.GetComponent<Enemy>().TakeDamage(GetComponent<Ally>().weapon.attackDamage);
        

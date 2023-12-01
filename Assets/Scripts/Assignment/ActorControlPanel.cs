@@ -10,6 +10,7 @@ public class ActorControlPanel : MonoSingleton<ActorControlPanel> ,IDropHandler
     public ActorControlItem AddActorControlPrefab(Ally act)
     {
         ActorControlItem prfb = Instantiate(actorControlPrefab, spawnPoint);
+        act.actorControlItem = prfb;
         prfb.image.sprite = act.ClassSprite;
         prfb.Name.text = act.ActName.ToString();
         prfb.Healt.text = act.currentHealth.ToString();
@@ -23,6 +24,7 @@ public class ActorControlPanel : MonoSingleton<ActorControlPanel> ,IDropHandler
 
     public void RefreshActorControlPrefab(Ally act , ActorControlItem item)
     {
+       
         item.image.sprite = act.ClassSprite;
         item.Name.text = act.ActName.ToString();
         item.Healt.text = act.currentHealth.ToString();

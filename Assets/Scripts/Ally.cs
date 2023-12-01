@@ -43,6 +43,7 @@ public class Ally : Actor
         StartCoroutine(SetAnimationSlowly());
         InvokeRepeating(nameof(DecreseHunger), 0, 100);
         levelText.text = Level.ToString();
+        ArmorBarActive();
     }
     public void ArmorBarActive()
     {
@@ -167,7 +168,7 @@ public class Ally : Actor
             enabled = false;
             agent.enabled = false;
             transform.GetChild(0).localPosition = new Vector3(0, -.7f, 0);
-      
+            Destroy(actorControlItem.gameObject);
         }
     }
 
@@ -241,6 +242,20 @@ public class Ally : Actor
         SetAnimations();
         StartCoroutine(SetAnimationSlowly());
     }
-
+    private void OnMouseEnter()
+    {
+        if (currentState!=ActorState.Attack)    
+        Bar.GetComponent<CanvasGroup>().DOFade(1, 1);
+    }
+    private void OnMouseOver()
+    {
+        if (currentState != ActorState.Attack)
+            Bar.transform.LookAt(Camera.main.transform);
+    }
+    private void OnMouseExit()
+    {
+        if (currentState != ActorState.Attack)
+            Bar.GetComponent<CanvasGroup>().DOFade(0, 1);
+    }
 
 }
