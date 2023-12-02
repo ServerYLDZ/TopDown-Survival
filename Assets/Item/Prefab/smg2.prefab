@@ -116,7 +116,7 @@ MonoBehaviour:
   SwordMesh: {fileID: 4136454040517575971, guid: 6ba6561694260284085317685e79514e, type: 3}
   attackSpeed: 0.6
   attackDelay: 0.3
-  attackDistance: 5
+  attackDistance: 8
   attackDamage: 2
   weponType: 2
 --- !u!114 &3406784223185591524

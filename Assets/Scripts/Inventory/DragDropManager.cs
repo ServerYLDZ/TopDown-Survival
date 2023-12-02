@@ -187,9 +187,14 @@ public class DragDropManager : MonoBehaviour, IBeginDragHandler, IDragHandler,IE
                    item.prefab.UseItem(GameManager.Instance.CurrentActor);
                    amount--;
                    amountTexxt.text = amount.ToString();
-                   transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                 
+                 
                    if (amount <= 0)
-                       Destroy(this.gameObject);
+                    {
+                        transform.parent.GetComponent<ItemSlot>().dragableitem = null;
+                        Destroy(this.gameObject);
+                    }
+                   
 
                    GameManager.Instance.CurrentActor.InfoPanel.SetInfoPanel();
                }

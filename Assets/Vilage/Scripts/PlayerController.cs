@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float FarmDistance = 3;
     float lookRotationSpeed = 8f;
 
-
+    bool isHoldLeft=false;
 
    
   
@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
     {
         input.Main.Move.performed += ctx => ClickToMove();
         input.Main.Interact.performed += ctx => InteractWith();
+        input.Main.Move.canceled += ctx => ResetMove();
+    }
+    void ResetMove()
+    {
+        isHoldLeft = false;
     }
     void InteractWith()
     {
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
              GetComponent<Ally>(). Bar.DOFade(1, 1);
                 GetComponent<Ally>().ArmorBarActive();
             }
-
+     
            
         }
      
@@ -93,6 +98,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(particle.gameObject, .5f);
             }
             GetComponent<Ally>().Bar.DOFade(0, 1);
+            isHoldLeft = true;
         }
     }
     void FollowTarget()
@@ -281,6 +287,24 @@ public class PlayerController : MonoBehaviour
         FollowTarget();
         FaceTarget();
         SetAnimations();
+
+        if (isHoldLeft)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers) && !GameManager.Instance.InventoryTAB.activeInHierarchy)
+            {
+                target = null;
+                playerBusy = false;
+                agent.destination = hit.point;
+             
+                GetComponent<Ally>().Bar.DOFade(0, 1);
+         
+            }
+        }
+
+    
+
+
     }
 
     void FaceTarget()
